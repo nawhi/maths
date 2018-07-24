@@ -23,6 +23,7 @@ public:
     friend std::ostream& operator << (std::ostream& os, const Matrix& m);
     double operator [] (const int& i) const { return elements[i]; }
 
+    static Matrix identity();
 
 private:
     /*

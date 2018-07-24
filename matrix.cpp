@@ -22,6 +22,16 @@ Matrix::Matrix(const Matrix& m)
     std::copy(std::begin(m.elements), std::end(m.elements), std::begin(elements));
 }
 
+Matrix Matrix::identity()
+{
+    return {
+        1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, 1, 0,
+        0, 0, 0, 1
+    };
+}
+
 std::string Matrix::str() const
 {
     /*

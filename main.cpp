@@ -19,5 +19,8 @@ int main()
     std::cout << m2 << std::endl;
     std::cout << m2(0, 0) << std::endl;
     std::cout << m2(0, 3) << std::endl;
-    std::cout << m2(0, 4) << std::endl;
+    // std::cout << m2(0, 4) << std::endl;
+
+    auto m3 = Matrix::identity();
+    std::cout << m3 << std::endl;
 }
