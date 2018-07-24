@@ -17,4 +17,7 @@ int main()
         5, 6, 7, 8
     };
     std::cout << m2 << std::endl;
+    std::cout << m2(0, 0) << std::endl;
+    std::cout << m2(0, 3) << std::endl;
+    std::cout << m2(0, 4) << std::endl;
 }

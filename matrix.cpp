@@ -17,23 +17,15 @@ Matrix::Matrix(std::initializer_list<double> elems)
     std::copy(std::begin(elems), std::end(elems), std::begin(elements));
 }
 
-
-
-std::ostream& operator << (std::ostream& os, const Matrix& m)
-{
-    os << m.str();
-    return os;
-}
-
 std::string Matrix::str() const
 {
     /*
+     * e.g.
      * [ 1  2  3  4  ]
      * [ 5  6  7  8  ]
      * [ 9  10 11 12 ]
      * [ 13 14 15 16 ]
      */
-    
     std::stringstream ss;
     for (int i = 0; i < 16; i += 4)
     {
@@ -46,4 +38,16 @@ std::string Matrix::str() const
     }
 
     return ss.str();
+}
+
+double Matrix::operator () (int i, int j)
+{
+    assert(i >= 0 && i < 4 && j >= 0 && j < 4);
+    return elements[i + j*4];
+}
+
+std::ostream& operator << (std::ostream& os, const Matrix& m)
+{
+    os << m.str();
+    return os;
 }
