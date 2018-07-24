@@ -5,5 +5,16 @@
 
 int main()
 {
-    std::cout << "Hello world" << std::endl;    
+    std::cout << "Hello world" << std::endl;
+
+    Matrix m;
+    std::cout << m << std::endl;
+
+    Matrix m2{
+        1, 2, 3, 4,
+        5, 6, 7, 8,
+        1, 2, 3, 4,
+        5, 6, 7, 8
+    };
+    std::cout << m2 << std::endl;
 }
