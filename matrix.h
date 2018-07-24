@@ -12,8 +12,8 @@
 class Matrix {
 public:
     Matrix();
-    explicit Matrix(std::initializer_list<double> elems);
-    explicit Matrix(const Matrix& m);
+    Matrix(std::initializer_list<double> elems);
+    Matrix(const Matrix& m);
 
     std::string str() const;
 
