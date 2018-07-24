@@ -17,6 +17,11 @@ Matrix::Matrix(std::initializer_list<double> elems)
     std::copy(std::begin(elems), std::end(elems), std::begin(elements));
 }
 
+Matrix::Matrix(const Matrix& m)
+{
+    std::copy(std::begin(m.elements), std::end(m.elements), std::begin(elements));
+}
+
 std::string Matrix::str() const
 {
     /*

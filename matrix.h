@@ -13,6 +13,7 @@ class Matrix {
 public:
     Matrix();
     Matrix(std::initializer_list<double> elems);
+    Matrix(const Matrix& m);
 
     std::string str() const;
 
