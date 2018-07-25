@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <array>
+#include <utility>
 
 /**
  * An immutable 4x4 matrix
@@ -13,16 +14,18 @@ class Matrix {
 public:
     Matrix();
     Matrix(std::initializer_list<double> elems);
+    static Matrix identity();
 
     std::string str() const;
 
-    // Returns Mij (0-indexed)
-    double operator () (int i, int j);
-
+    double operator () (int i, int j); // 0-indexed
+    double operator [] (const int& i) const;
     friend std::ostream& operator << (std::ostream& os, const Matrix& m);
-    double operator [] (const int& i) const { return elements[i]; }
 
-    static Matrix identity();
+    // Returns the LU-decomposition of the matrix:
+    // the diagonals of L are always 1
+    std::pair<Matrix, Matrix> lu_decomp();
+
 
 private:
     /*

@@ -56,8 +56,18 @@ double Matrix::operator () (int i, int j)
     return elements[i + j*4];
 }
 
+double Matrix::operator [] (const int& i) const
+{
+    return elements[i];
+}
+
 std::ostream& operator << (std::ostream& os, const Matrix& m)
 {
     os << m.str();
     return os;
+}
+
+std::pair<Matrix, Matrix> Matrix::lu_decomp()
+{
+    throw "Not implemented";
 }
