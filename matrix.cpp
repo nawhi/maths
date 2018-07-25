@@ -50,7 +50,7 @@ std::string Matrix::str() const
     return ss.str();
 }
 
-double Matrix::operator () (int i, int j)
+double Matrix::operator () (int i, int j) const
 {
     assert(i >= 0 && i < 4 && j >= 0 && j < 4);
     return elements[i + j*4];
@@ -59,6 +59,16 @@ double Matrix::operator () (int i, int j)
 double Matrix::operator [] (const int& i) const
 {
     return elements[i];
+}
+
+bool Matrix::operator == (const Matrix& other) const
+{
+    return elements == other.elements;
+}
+
+bool Matrix::operator != (const Matrix& other) const
+{
+    return elements != other.elements;
 }
 
 std::ostream& operator << (std::ostream& os, const Matrix& m)

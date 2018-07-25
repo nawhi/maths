@@ -18,10 +18,14 @@ public:
 
     std::string str() const;
 
-    double operator () (int i, int j); // 0-indexed
+    double operator () (int i, int j) const; // 0-indexed
     double operator [] (const int& i) const;
-    friend std::ostream& operator << (std::ostream& os, const Matrix& m);
 
+    bool operator == (const Matrix& other) const;
+    bool operator != (const Matrix& other) const;
+
+    friend std::ostream& operator << (std::ostream& os, const Matrix& m);
+    
     // Returns the LU-decomposition of the matrix:
     // the diagonals of L are always 1
     std::pair<Matrix, Matrix> lu_decomp();
