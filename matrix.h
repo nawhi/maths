@@ -24,6 +24,8 @@ public:
     bool operator == (const Matrix& other) const;
     bool operator != (const Matrix& other) const;
 
+    Matrix operator * (const Matrix& other) const;
+
     friend std::ostream& operator << (std::ostream& os, const Matrix& m);
     
     // Returns the LU-decomposition of the matrix:

@@ -71,6 +71,20 @@ bool Matrix::operator != (const Matrix& other) const
     return elements != other.elements;
 }
 
+Matrix Matrix::operator * (const Matrix& other) const
+{
+    Matrix res;
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            int ix = i + 4*j;
+            res.elements[ix] = elements[ix] * other[ix];
+        }
+    }
+    return res;
+}
+
 std::ostream& operator << (std::ostream& os, const Matrix& m)
 {
     os << m.str();
