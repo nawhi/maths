@@ -24,11 +24,6 @@ public:
     Matrix<T>() = default;
     Matrix<T>(std::initializer_list<T> elems);
 
-    // can't make these work as need type specific 
-    // implementations
-    // static Matrix<T> identity();
-    // static Matrix<T> zero();
-
     std::string str() const;
 
     T operator () (int i, int j) const; // 0-indexed
@@ -87,19 +82,12 @@ bool Matrix<T>::operator != (const Matrix<T>& other) const
     return elements != other.elements;
 }
 
+// this is broken
 template <typename T>
 Matrix<T> Matrix<T>::operator * (const Matrix<T>& other) const
 {
-    Matrix<T> res;
-    for (int i = 0; i < 4; i++)
-    {
-        for (int j = 0; j < 4; j++)
-        {
-            int ix = i + 4*j;
-            res.elements[ix] = elements[ix] * other[ix];
-        }
-    }
-    return res;
+    throw "TODO";
+    return other;
 }
 
 template<typename T>
@@ -115,11 +103,11 @@ std::string Matrix<T>::str() const
     std::stringstream ss;
     for (int i = 0; i < 16; i += 4)
     {
-        ss << "\n[";
+        ss << "\n[ ";
         ss << elements[i] << " "
            << elements[i+1] << " "
            << elements[i+2] << " "
-           << elements[i+3] << "]";
+           << elements[i+3] << " ]";
     }
 
     return ss.str();
