@@ -139,4 +139,10 @@ std::ostream& operator << (std::ostream& os, const Matrix<T>& m)
     return os;
 }
 
+template <typename T>
+std::pair<Matrix<T>, Matrix<T>> Matrix<T>::lu_decomp()
+{
+    throw "Not implemented";
+}
+
 #endif /* MATRIX_H */
