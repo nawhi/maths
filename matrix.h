@@ -39,13 +39,6 @@ public:
 
     Matrix<T> operator * (const Matrix<T>& other) const;
 
-    // friend std::ostream& operator << (std::ostream& os, const Matrix<T>& m);
-    
-    // Returns the LU-decomposition of the matrix:
-    // the diagonals of L are always 1
-    std::pair<Matrix<T>, Matrix<T>> lu_decomp();
-
-
 private:
     /*
      * Elements read left-to-right from top-left:
@@ -139,9 +132,17 @@ std::ostream& operator << (std::ostream& os, const Matrix<T>& m)
     return os;
 }
 
+/**
+ * Perform an LU-decomposition on any matrix with nonzero
+ * pivots.
+ * @param mx the input matrix, which must be invertible and
+ *        have nonzero pivots
+ * @return a std::pair where first is L, and second is U
+ */
 template <typename T>
-std::pair<Matrix<T>, Matrix<T>> Matrix<T>::lu_decomp()
+std::pair<Matrix<T>, Matrix<T>> lu_decomp(Matrix<T> mx)
 {
+    std::cout << mx << std::endl;
     throw "Not implemented";
 }
 
