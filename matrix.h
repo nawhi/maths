@@ -32,6 +32,9 @@ public:
 
     Matrix<T> operator * (const Matrix<T>& rhs) const;
 
+    T get(int row, int col) const;
+    void set(int row, int col, T t);
+
 private:
     /*
      * Internally, elements read from top-left 
@@ -44,8 +47,11 @@ private:
      */
     std::array<T, 16> elements;
 
-    T get(int row, int col) const { return elements[row + 4*col]; }
-    void set(int row, int col, T t) { elements[row + 4*col] = t; }
+    static bool rangecheck(int row, int col)
+    {
+        return row >= 0 && row < 4 && col >= 0 && col < 4;
+    }
+
 };
 
 /**
@@ -71,7 +77,7 @@ Matrix<T>::Matrix(std::initializer_list<T> elems)
 template <typename T>
 T Matrix<T>::operator () (int row, int col) const
 {
-    assert(row >= 0 && row < 4 && col >= 0 && col < 4);
+    assert(rangecheck(row, col));
     return get(row, col);
 }
 
@@ -103,6 +109,24 @@ Matrix<T> Matrix<T>::operator * (const Matrix<T>& rhs) const
     }
     return ret;
 }
+
+/**
+ * Range-checked getter and setter
+ */
+template <typename T>
+T Matrix<T>::get(int row, int col) const
+{ 
+    assert(rangecheck(row, col));
+    return elements[row + 4*col]; 
+}
+
+template <typename T>
+void Matrix<T>::set(int row, int col, T t) 
+{
+    assert(rangecheck(row, col));
+    elements[row + 4*col] = t;
+}
+
 
 template <typename T>
 std::ostream& operator << (std::ostream& os, const Matrix<T>& m)
