@@ -24,8 +24,6 @@ public:
     Matrix<T>() = default;
     Matrix<T>(std::initializer_list<T> elems);
 
-    std::string str() const;
-
     T operator () (int row, int col) const; // 0-indexed
 
     bool operator == (const Matrix& other) const;
@@ -35,6 +33,8 @@ public:
 
     T get(int row, int col) const;
     void set(int row, int col, T t);
+
+    std::string str() const;
 
 private:
     /*
@@ -128,17 +128,24 @@ void Matrix<T>::set(int row, int col, T t)
     elements[row + 4*col] = t;
 }
 
+template<typename T>
+std::string Matrix<T>::str() const
+{
+    std::stringstream ss;
+    for (int i = 0; i < 4; i++)
+    {
+        ss << "\n[ ";
+        for (int j = 0; j < 4; j++)
+            ss << get(i, j) << " ";
+        ss << "]";
+    }
+    return ss.str();
+}
 
 template <typename T>
 std::ostream& operator << (std::ostream& os, const Matrix<T>& m)
 {
-    for (int i = 0; i < 4; i++)
-    {
-        os << "\n[ ";
-        for (int j = 0; j < 4; j++)
-            os << m(i, j) << " ";
-        os << "]";
-    }
+    os << m.str();
     return os;
 }
 
