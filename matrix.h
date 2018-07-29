@@ -12,9 +12,8 @@
 #include <sstream>
 
 /*
- * An immutable 4x4 matrix.
- * T is taken to be a numeric type and
- * must support equality operators == !=,
+ * An 4x4 matrix which is publicly immutable.
+ * Type T must support equality operators == !=,
  * arithmetic operators + - * /,
  * and the stream operator <<
  */
