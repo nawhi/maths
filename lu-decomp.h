@@ -60,10 +60,6 @@ std::pair<Matrix<T>, Matrix<T>> lu_decomp(Matrix<T> mx)
 
             // Update L
             l.set(c+k, c, factor);
-
-            printf("After eliminating (%d,%d):", c, k);
-            std::cout << l << std::endl;
-            std::cout << u << std::endl;
         }
     }
     return std::make_pair(l, u);
