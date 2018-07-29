@@ -94,14 +94,9 @@ TEST_CASE( "Matrices can be multiplied together" )
     REQUIRE( l * u == decomp_input );
 }
 
-TEST_CASE( "LU decomposition of I and 0 works" )
+TEST_CASE( "LU decomposition of I works" )
 {
     auto res = lu_decomp(identity);
-    REQUIRE( is_lower_diag(res.first) );
-    REQUIRE( is_upper_diag(res.second) );
-    REQUIRE( res.first * res.second == identity );
-
-    res = lu_decomp(zero);
     REQUIRE( is_lower_diag(res.first) );
     REQUIRE( is_upper_diag(res.second) );
     REQUIRE( res.first * res.second == identity );
@@ -116,6 +111,8 @@ TEST_CASE( "LU decomposition of simple integer matrix works" )
      */
     auto res = lu_decomp(decomp_input);
     REQUIRE( is_lower_diag(res.first) );
+    std::cout << res.first << std::endl;
+    std::cout << res.second << std::endl;
     REQUIRE( is_upper_diag(res.second) );
     REQUIRE( res.first * res.second == identity );
 }

@@ -15,6 +15,7 @@
  * An 4x4 matrix which is publicly immutable.
  * Type T must support equality operators == !=,
  * arithmetic operators + - * /,
+ * unary operators + -,
  * and the stream operator <<
  */
 template <typename T>
