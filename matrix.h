@@ -123,9 +123,10 @@ std::ostream& operator << (std::ostream& os, const Matrix<T>& m)
 /**
  * Perform an LU-decomposition on any matrix with nonzero
  * pivots.
- * @param mx the input matrix, which must be invertible and
- *        have nonzero pivots
- * @return a std::pair where first is L, and second is U
+ * @param mx an invertible Matrix with nonzero pivots
+ * @return a pair p where p.first is a lower diagonal 
+ *        matrix, p.second is an upper diagonal matrix, and
+ *        p.first * p.second = mx
  */
 template <typename T>
 std::pair<Matrix<T>, Matrix<T>> lu_decomp(Matrix<T> mx)
