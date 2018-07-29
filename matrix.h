@@ -30,7 +30,7 @@ public:
     bool operator == (const Matrix& other) const;
     bool operator != (const Matrix& other) const;
 
-    Matrix<T> operator * (const Matrix<T>& other) const;
+    Matrix<T> operator * (const Matrix<T>& rhs) const;
 
 private:
     /*
@@ -40,12 +40,11 @@ private:
      * 4  5  6  7
      * 8  9  10 11
      * 12 13 14 15
-     *
-     * It should really be const but that causes
-     * constructor problems
      */
     std::array<T, 16> elements;
 
+    T get(int i, int j) const { return elements[i + 4*j]; }
+    void set(int i, int j, T t) { elements[i + 4*j] = t; }
 };
 
 template<typename T>
@@ -74,12 +73,21 @@ bool Matrix<T>::operator != (const Matrix<T>& other) const
     return elements != other.elements;
 }
 
-// this is broken
 template <typename T>
-Matrix<T> Matrix<T>::operator * (const Matrix<T>& other) const
+Matrix<T> Matrix<T>::operator * (const Matrix<T>& rhs) const
 {
-    throw "TODO";
-    return other;
+    Matrix<T> ret;
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            T sum = 0;
+            for (int k = 0; k < 4; k++)
+                sum += get(k, j) * rhs.get(i, k);
+            ret.set(i, j, sum);
+        }
+    }
+    return ret;
 }
 
 template<typename T>
