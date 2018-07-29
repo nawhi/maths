@@ -26,7 +26,6 @@ public:
     std::string str() const;
 
     T operator () (int i, int j) const; // 0-indexed
-    T operator [] (const int& i) const;
 
     bool operator == (const Matrix& other) const;
     bool operator != (const Matrix& other) const;
@@ -61,12 +60,6 @@ T Matrix<T>::operator () (int i, int j) const
 {
     assert(i >= 0 && i < 4 && j >= 0 && j < 4);
     return elements[i + j*4];
-}
-
-template <typename T>
-T Matrix<T>::operator [] (const int& i) const
-{
-    return elements[i];
 }
 
 template <typename T>
