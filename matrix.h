@@ -25,7 +25,7 @@ public:
 
     std::string str() const;
 
-    T operator () (int i, int j) const; // 0-indexed
+    T operator () (int row, int col) const; // 0-indexed
 
     bool operator == (const Matrix& other) const;
     bool operator != (const Matrix& other) const;
@@ -34,31 +34,45 @@ public:
 
 private:
     /*
-     * Elements read left-to-right from top-left:
+     * Internally, elements read from top-left 
+     * in columns, OpenGL style:
      *
-     * 0  1  2  3
-     * 4  5  6  7
-     * 8  9  10 11
-     * 12 13 14 15
+     * 0  4  8  12
+     * 1  5  9  13
+     * 2  6  10 14
+     * 3  7  11 15
      */
     std::array<T, 16> elements;
 
-    T get(int i, int j) const { return elements[i + 4*j]; }
-    void set(int i, int j, T t) { elements[i + 4*j] = t; }
+    T get(int row, int col) const { return elements[row + 4*col]; }
+    void set(int row, int col, T t) { elements[row + 4*col] = t; }
 };
 
+/**
+ * Constructor designed to take matrices in written form:
+ *
+ * 0  1  2  3
+ * 4  5  6  7
+ * 8  9  10 11
+ * 12 13 14 15 
+ */
 template<typename T>
 Matrix<T>::Matrix(std::initializer_list<T> elems)
 {
     assert(elems.size() == elements.size());
-    std::copy(std::begin(elems), std::end(elems), std::begin(elements));
+
+    for (auto it = elems.begin(); it != elems.end(); ++it)
+    {
+        int ix = it - elems.begin();
+        set(ix / 4, ix % 4, *it);
+    }
 }
 
 template <typename T>
-T Matrix<T>::operator () (int i, int j) const
+T Matrix<T>::operator () (int row, int col) const
 {
-    assert(i >= 0 && i < 4 && j >= 0 && j < 4);
-    return elements[i + j*4];
+    assert(row >= 0 && row < 4 && col >= 0 && col < 4);
+    return get(row, col);
 }
 
 template <typename T>
@@ -83,40 +97,23 @@ Matrix<T> Matrix<T>::operator * (const Matrix<T>& rhs) const
         {
             T sum = 0;
             for (int k = 0; k < 4; k++)
-                sum += get(k, j) * rhs.get(i, k);
+                sum += get(i, k) * rhs.get(k, j);
             ret.set(i, j, sum);
         }
     }
     return ret;
 }
 
-template<typename T>
-std::string Matrix<T>::str() const
-{
-    /*
-     * e.g.
-     * [ 1  2  3  4  ]
-     * [ 5  6  7  8  ]
-     * [ 9  10 11 12 ]
-     * [ 13 14 15 16 ]
-     */
-    std::stringstream ss;
-    for (int i = 0; i < 16; i += 4)
-    {
-        ss << "\n[ ";
-        ss << elements[i] << " "
-           << elements[i+1] << " "
-           << elements[i+2] << " "
-           << elements[i+3] << " ]";
-    }
-
-    return ss.str();
-}
-
 template <typename T>
 std::ostream& operator << (std::ostream& os, const Matrix<T>& m)
 {
-    os << m.str();
+    for (int i = 0; i < 4; i++)
+    {
+        os << "\n[ ";
+        for (int j = 0; j < 4; j++)
+            os << m(i, j) << " ";
+        os << "]";
+    }
     return os;
 }
 

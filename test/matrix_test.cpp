@@ -43,7 +43,7 @@ bool is_lower_diag(const Matrix<int>& m)
 {
     const auto ones = { m(0,0), m(1,1), m(2,2), m(3,3) };
     const auto zeroes = { 
-        m(1,0), m(2,0), m(3,0), m(2,1), m(3,1), m(3,2)
+        m(0,1), m(0,2), m(0,3), m(1,2), m(1,3), m(2,3)
     };
 
     return 
@@ -56,10 +56,20 @@ bool is_lower_diag(const Matrix<int>& m)
 bool is_upper_diag(const Matrix<int>& m)
 {
     const auto zeroes = {
-        m(0,1), m(0,2), m(1,2), m(0,3), m(1,3), m(2,3)
+        m(1,0), m(2,0), m(3,0), m(2,1), m(3,1), m(3,2)
     };
     return std::all_of(std::begin(zeroes), std::end(zeroes),
         [](const auto& i) { return i == 0; });
+}
+
+TEST_CASE( "is_lower_diag works" )
+{
+    REQUIRE( is_lower_diag(lower_diagonal) );
+}
+
+TEST_CASE( "is_upper_diag works" )
+{
+    REQUIRE( is_upper_diag(upper_diagonal) );
 }
 
 TEST_CASE( "Matrices can be compared for equality" )
@@ -69,8 +79,6 @@ TEST_CASE( "Matrices can be compared for equality" )
     REQUIRE( i == i );
     REQUIRE( i == i2 );
     REQUIRE( i != zero );
-    REQUIRE( is_lower_diag(lower_diagonal) );
-    REQUIRE( is_upper_diag(upper_diagonal) );
 }
 
 TEST_CASE( "Matrices can be multiplied together" )
