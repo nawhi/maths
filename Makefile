@@ -5,16 +5,16 @@ EXEC = matrix
 
 matrix: matrix.cpp main.cpp
 	mkdir -p build/
-	g++ $(CPPFLAGS) -o build/$(EXEC) main.cpp matrix.cpp 
+	g++ $(CPPFLAGS) -o build/$(EXEC) main.cpp lu-decomp.cpp matrix.cpp 
 
 
-test: matrix.cpp test/catch_main.cpp test/matrix_test.cpp
-	g++ $(CPPFLAGS) -o build/tests matrix.cpp test/catch_main.cpp test/matrix_test.cpp
+test: matrix.cpp lu-decomp.cpp test/catch_main.cpp test/matrix_test.cpp
+	g++ $(CPPFLAGS) -o build/tests matrix.cpp lu-decomp.cpp test/catch_main.cpp test/matrix_test.cpp
 	build/tests
 	rm build/tests
 
-test-debug: matrix.cpp test/catch_main.cpp test/matrix_test.cpp
-	g++ $(CPPFLAGS) $(DEBUG) -o build/tests matrix.cpp test/catch_main.cpp test/matrix_test.cpp
+test-debug: matrix.cpp lu-decomp.cpp test/catch_main.cpp test/matrix_test.cpp
+	g++ $(CPPFLAGS) $(DEBUG) -o build/tests matrix.cpp lu-decomp.cpp test/catch_main.cpp test/matrix_test.cpp
 	lldb -f build/tests
 	rm build/tests
 

@@ -1,12 +1,13 @@
 #include <iostream>
 #include "matrix.h"
+#include "lu-decomp.h"
 
 int main()
 {
     std::cout << "Hello world" << std::endl;
 
     Matrix<double> m;
-    std::cout << m << std::endl;
+    // std::cout << m << std::endl;
 
     Matrix<int> m2{
         1, 2, 3, 4,
