@@ -81,29 +81,21 @@ Matrix<T>::Matrix(std::initializer_list<T> elems)
  * Constructor designed to take matrices in a
  * vector of four vectors:
  *
- * [0 1 2 3]
- * [0 1 2 3]
- * [0 1 2 3]
- * [0 1 2 3]
+ * v[0][0] v[0][1] v[0][2] v[0][3]
+ * v[1][0] v[1][1] v[1][2] v[1][3]
+ * v[2][0] v[2][1] v[2][2] v[2][3]
+ * v[3][0] v[3][1] v[3][2] v[3][3]
  */
 template<typename T>
-Matrix<T>::Matrix(std::vector<std::vector<T>> elems)
+Matrix<T>::Matrix(std::vector<std::vector<T>> v)
 {
-    assert(elems.size() == 4);
-        
-    int i = 0;
-    for (const auto& row: elems)
-    {
+    assert(v.size() == 4);
+    for(const auto& row: v)
         assert(row.size() == 4);
-
-        int j = 0;
-        for (const auto& elem: row)
-        {
-            elements[j] = elem;
-            j += 4;
-        }
-        i++;
-    }
+        
+    for (int i = 0; i < 4; i++)
+        for (int j = 0; j < 4; j++)
+            elements[4*i + j] = v[j][i];
 }
 
 template <typename T>
