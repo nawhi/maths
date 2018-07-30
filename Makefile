@@ -5,7 +5,7 @@ EXEC = matrix
 
 matrix: matrix.cpp main.cpp
 	mkdir -p build/
-	g++ $(CPPFLAGS) -o build/$(EXEC) main.cpp lu-decomp.cpp matrix.cpp 
+	g++ $(CPPFLAGS) $(DEBUG) -o build/$(EXEC) main.cpp lu-decomp.cpp matrix.cpp 
 
 
 test: matrix.cpp lu-decomp.cpp test/catch_main.cpp test/matrix_test.cpp
