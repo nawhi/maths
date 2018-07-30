@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <iterator>
 #include <sstream>
+#include <vector>
 
 /*
  * An 4x4 matrix which is publicly immutable.
@@ -23,6 +24,7 @@ class Matrix {
 public:
     Matrix<T>() = default;
     Matrix<T>(std::initializer_list<T> elems);
+    Matrix<T>(std::vector<std::vector<T>> elems);
 
     T operator () (int row, int col) const; // 0-indexed
 
@@ -72,6 +74,35 @@ Matrix<T>::Matrix(std::initializer_list<T> elems)
     {
         int ix = it - elems.begin();
         set(ix / 4, ix % 4, *it);
+    }
+}
+
+/**
+ * Constructor designed to take matrices in a
+ * vector of four vectors:
+ *
+ * [0 1 2 3]
+ * [0 1 2 3]
+ * [0 1 2 3]
+ * [0 1 2 3]
+ */
+template<typename T>
+Matrix<T>::Matrix(std::vector<std::vector<T>> elems)
+{
+    assert(elems.size() == 4);
+        
+    int i = 0;
+    for (const auto& row: elems)
+    {
+        assert(row.size() == 4);
+
+        int j = 0;
+        for (const auto& elem: row)
+        {
+            elements[j] = elem;
+            j += 4;
+        }
+        i++;
     }
 }
 
