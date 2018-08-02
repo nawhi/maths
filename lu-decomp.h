@@ -37,9 +37,8 @@ Matrix<T> add_row_multiple(const Matrix<T>& mx, int r_from, int r_to, T factor)
  * @param mx an invertible Matrix with nonzero pivots
  * @return a pair p where p.first is a lower diagonal 
  *        matrix with ones on the diagonal, p.second 
- *        is an upper diagonal matrix which may have
- *        anything on the diagnonal, and 
- *        p.first * p.second = mx
+ *        is an upper diagonal matrix with any numbers
+ *        on the diagonal, and p.first * p.second == mx
  */
 template <typename T>
 std::pair<Matrix<T>, Matrix<T>> lu_decomp(Matrix<T> mx)
