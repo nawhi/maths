@@ -13,7 +13,7 @@
 #include <vector>
 
 /*
- * An 4x4 matrix which is publicly immutable.
+ * An 4x4 matrix.
  * Type T must support equality operators == !=,
  * arithmetic operators + - * /,
  * unary operators + -,
