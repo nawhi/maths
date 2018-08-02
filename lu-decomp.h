@@ -48,18 +48,18 @@ std::pair<Matrix<T>, Matrix<T>> lu_decomp(Matrix<T> mx)
     Matrix<T> l = IDENTITY;
     Matrix<T> u = mx;
 
-    for (int c = 0; c < 3; c++)
+    for (int c = 0; c < 3 /* stop before final row */; c++)
     {
-        for (int k = c+1; k < 4-c; k++)
+        for (int k = c+1; k < 4; k++)
         {
             // What's needed to eliminate position (c+k, c)?
-            T factor = mx(c+k, c) / mx(c, c);
+            T factor = u(k, c) / u(c, c);
 
             // Eliminate
             u = add_row_multiple(u, c, k, -factor);
 
             // Update L
-            l.set(c+k, c, factor);
+            l.set(k, c, factor);
         }
     }
     return std::make_pair(l, u);
