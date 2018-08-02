@@ -94,6 +94,33 @@ TEST_CASE( "Matrices can be multiplied together" )
     REQUIRE( l * u == decomp_input );
 }
 
+TEST_CASE( "add_row_multiple works on integer matrices" )
+{
+    Matrix<int> prev = {
+	0,2,4,3,
+	2,3,5,4,
+	0,0,1,0,
+	0,0,0,1
+    };
+    Matrix<int> post12 = {
+    	0,2,4,3,
+    	2,9,17,13,
+    	0,0,1,0,
+    	0,0,0,1
+    };
+
+    REQUIRE( add_row_multiple(prev, 0, 1, 3) == post12 );
+
+    Matrix<int> post24 = {
+	0,2,4,3,
+	2,3,5,4,
+	0,0,1,0,
+	-2,-3,-5,-3
+    };
+
+    REQUIRE( add_row_multiple(prev, 1, 3, -1) == post24 );
+}
+
 TEST_CASE( "LU decomposition of I works" )
 {
     auto res = lu_decomp(identity);
