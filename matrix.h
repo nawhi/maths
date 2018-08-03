@@ -26,16 +26,32 @@ public:
     Matrix<T>(std::initializer_list<T> elems);
     Matrix<T>(std::vector<std::vector<T>> elems);
 
-    T operator () (int row, int col) const; // 0-indexed
-
-    bool operator == (const Matrix& other) const;
-    bool operator != (const Matrix& other) const;
-
-    Matrix<T> operator * (const Matrix<T>& rhs) const;
-
+    /*
+     * Zero-indexed getters and setters.
+     * operator () is a shorthand for get()
+     */
+    T operator () (int row, int col) const;
     T get(int row, int col) const;
     void set(int row, int col, T t);
 
+    
+    /*
+     * Arithmetic and equality operators 
+     */
+
+    template <typename U>
+    friend bool operator == (const Matrix<U>& lhs, const Matrix<U>& rhs);
+    
+    template <typename U>
+    friend bool operator != (const Matrix<U>& lhs, const Matrix<U>& rhs);
+
+    template <typename U>
+    friend Matrix<U> operator * (const Matrix<U>& lhs, const Matrix<U>& rhs);
+
+    /**
+     * Method for converting matrix to a string. (Useful for debuggers)
+     * @return a string representation of the matrix
+     */
     std::string str() const;
 
 private:
@@ -106,38 +122,6 @@ T Matrix<T>::operator () (int row, int col) const
 }
 
 template <typename T>
-bool Matrix<T>::operator == (const Matrix<T>& other) const
-{
-    return elements == other.elements;
-}
-
-template <typename T>
-bool Matrix<T>::operator != (const Matrix<T>& other) const
-{
-    return elements != other.elements;
-}
-
-template <typename T>
-Matrix<T> Matrix<T>::operator * (const Matrix<T>& rhs) const
-{
-    Matrix<T> ret;
-    for (int i = 0; i < 4; i++)
-    {
-        for (int j = 0; j < 4; j++)
-        {
-            T sum = 0;
-            for (int k = 0; k < 4; k++)
-                sum += get(i, k) * rhs.get(k, j);
-            ret.set(i, j, sum);
-        }
-    }
-    return ret;
-}
-
-/**
- * Range-checked getter and setter
- */
-template <typename T>
 T Matrix<T>::get(int row, int col) const
 { 
     assert(rangecheck(row, col));
@@ -149,6 +133,35 @@ void Matrix<T>::set(int row, int col, T t)
 {
     assert(rangecheck(row, col));
     elements[row + 4*col] = t;
+}
+
+template <typename T>
+bool operator == (const Matrix<T>& lhs, const Matrix<T>& rhs)
+{
+    return lhs.elements == rhs.elements;
+}
+
+template <typename T>
+bool operator != (const Matrix<T>& lhs, const Matrix<T>& rhs)
+{
+    return lhs.elements != rhs.elements;
+}
+
+template <typename T>
+Matrix<T> operator * (const Matrix<T>& lhs, const Matrix<T>& rhs)
+{
+    Matrix<T> ret;
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            T sum = 0;
+            for (int k = 0; k < 4; k++)
+                sum += lhs(i, k) * rhs(k, j);
+            ret.set(i, j, sum);
+        }
+    }
+    return ret;
 }
 
 template<typename T>
