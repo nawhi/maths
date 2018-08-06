@@ -138,8 +138,6 @@ TEST_CASE( "LU decomposition of simple integer matrix works" )
      */
     auto res = lu_decomp(decomp_input);
     REQUIRE( is_lower_diag(res.first) );
-    std::cout << res.first << std::endl;
-    std::cout << res.second << std::endl;
     REQUIRE( is_upper_diag(res.second) );
     REQUIRE( res.first * res.second == decomp_input );
 }
