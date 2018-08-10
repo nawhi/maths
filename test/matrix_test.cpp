@@ -4,78 +4,80 @@
 #include "../src/lu-decomp.h"
 
 
-Matrix<int> zero = {
+Matrix<int, 4> zero = {
     0, 0, 0, 0,
     0, 0, 0, 0,
     0, 0, 0, 0,
     0, 0, 0, 0
 };
 
-Matrix<int> identity = {
-    1, 0, 0, 0,
-    0, 1, 0, 0,
-    0, 0, 1, 0,
-    0, 0, 0, 1
-};
-
-Matrix<int> decomp_input = {
+Matrix<int, 4> decomp_input = {
     1, 4, 2, 3,
     1, 2, 1, 0,
     0, 0, 1, 2,
     2, 6, 3, 1
 };
 
-Matrix<int> lower_diagonal = {
+Matrix<int, 4> lower_diagonal = {
     1, 0, 0, 0,
     1, 1, 0, 0,
     0, 0, 1, 0,
     2, 1, 0, 1,
 };
 
-Matrix<int> upper_diagonal = {
+Matrix<int, 4> upper_diagonal = {
     1, 4, 2, 3,
     0, -2, -1, -3,
     0, 0, 1, 2,
     0, 0, 0, -2,
 };
 
-bool is_lower_diag(const Matrix<int>& m)
+template<typename T, int size>
+bool is_lower_diag(const Matrix<T, size>& m)
 {
-    const auto ones = { m(0,0), m(1,1), m(2,2), m(3,3) };
-    const auto zeroes = { 
-        m(0,1), m(0,2), m(0,3), m(1,2), m(1,3), m(2,3)
-    };
-
-    return 
-        std::all_of(std::begin(ones), std::end(ones),
-            [](const auto& i) { return i == 1; })
-        && std::all_of(std::begin(zeroes), std::end(zeroes),
-            [](const auto& i) { return i == 0; });
+    for (int i = 0; i < size; ++i)
+        for (int j = 0; j < size; ++j)
+            if (i < j && m(i, j) != 0)
+                return false;
+    return true;
 }
 
-bool is_upper_diag(const Matrix<int>& m)
+template<typename T, int size>
+bool is_upper_diag(const Matrix<T, size>& m)
 {
-    const auto zeroes = {
-        m(1,0), m(2,0), m(3,0), m(2,1), m(3,1), m(3,2)
-    };
-    return std::all_of(std::begin(zeroes), std::end(zeroes),
-        [](const auto& i) { return i == 0; });
+    for (int i = 0; i < size; ++i)
+        for (int j = 0; j < size; ++j)
+            if (i > j && m(i, j) != 0)
+                return false;
+    return true;
 }
 
 TEST_CASE( "is_lower_diag works" )
 {
     REQUIRE( is_lower_diag(lower_diagonal) );
+
+    Matrix<double, 2> d = {
+        1.5, 0,
+        2.5, 3.5
+    };
+    REQUIRE( is_lower_diag(d) );
 }
 
 TEST_CASE( "is_upper_diag works" )
 {
     REQUIRE( is_upper_diag(upper_diagonal) );
+
+    Matrix<double, 2> u = {
+        1.5, 2.5,
+        0,   3.5
+    };
+    REQUIRE( is_upper_diag(u) );
 }
 
 TEST_CASE( "Matrices can be compared for equality" )
 {
-    auto i = identity;
-    auto i2 = identity;
+    auto i = Matrix<int, 4>::identity();
+    auto i2 = Matrix<int, 4>::identity();
     REQUIRE( i == i );
     REQUIRE( i == i2 );
     REQUIRE( i != zero );
@@ -86,7 +88,7 @@ TEST_CASE( "Matrices can be multiplied together" )
     auto z = zero;
     REQUIRE( z*z == z );
 
-    auto i = identity;
+    auto i = Matrix<int, 4>::identity();
     REQUIRE( i*i == i );
 
     auto l = lower_diagonal;
@@ -96,26 +98,26 @@ TEST_CASE( "Matrices can be multiplied together" )
 
 TEST_CASE( "add_row_multiple works on integer matrices" )
 {
-    Matrix<int> prev = {
-	0,2,4,3,
-	2,3,5,4,
-	0,0,1,0,
-	0,0,0,1
+    Matrix<int, 4> prev = {
+        0,2,4,3,
+        2,3,5,4,
+        0,0,1,0,
+        0,0,0,1
     };
-    Matrix<int> post12 = {
-    	0,2,4,3,
-    	2,9,17,13,
-    	0,0,1,0,
-    	0,0,0,1
+    Matrix<int, 4> post12 = {
+        0,2,4,3,
+        2,9,17,13,
+        0,0,1,0,
+        0,0,0,1
     };
 
     REQUIRE( add_row_multiple(prev, 0, 1, 3) == post12 );
 
-    Matrix<int> post24 = {
-	0,2,4,3,
-	2,3,5,4,
-	0,0,1,0,
-	-2,-3,-5,-3
+    Matrix<int, 4> post24 = {
+        0,2,4,3,
+        2,3,5,4,
+        0,0,1,0,
+        -2,-3,-5,-3
     };
 
     REQUIRE( add_row_multiple(prev, 1, 3, -1) == post24 );
@@ -123,13 +125,13 @@ TEST_CASE( "add_row_multiple works on integer matrices" )
 
 TEST_CASE( "LU decomposition of I works" )
 {
-    auto res = lu_decomp(identity);
+    auto res = lu_decomp(Matrix<int, 4>::identity());
     REQUIRE( is_lower_diag(res.first) );
     REQUIRE( is_upper_diag(res.second) );
-    REQUIRE( res.first * res.second == identity );
+    REQUIRE( res.first * res.second == Matrix<int, 4>::identity() );
 }
 
-TEST_CASE( "LU decomposition of simple integer matrix works" )
+TEST_CASE( "LU decomposition of 4x4 integer matrix works" )
 {
     /*
      * Problem with using integer matrices to test this
@@ -140,4 +142,17 @@ TEST_CASE( "LU decomposition of simple integer matrix works" )
     REQUIRE( is_lower_diag(res.first) );
     REQUIRE( is_upper_diag(res.second) );
     REQUIRE( res.first * res.second == decomp_input );
+}
+
+TEST_CASE( "LU decomposition of 3x3 floating point matrix works" )
+{
+    Matrix<double, 3> m2 = {
+        -5,  3,  4,
+        10, -8, -9,
+        15,  1,  3
+    };
+    auto r2 = lu_decomp(m2);
+    REQUIRE( is_lower_diag(r2.first) );
+    REQUIRE( is_upper_diag(r2.second) );
+    REQUIRE( r2.first * r2.second == m2 );
 }

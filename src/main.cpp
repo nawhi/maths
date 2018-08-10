@@ -3,7 +3,12 @@
 #include "matrix.h"
 #include "lu-decomp.h"
 
-// Todo: exceptions
+/**
+ * Read a comma-separated line of integers into a vector.
+ * @param line the raw string to read
+ * @return a vector containing all comma-separated integers
+ *         on the line
+ */
 std::vector<int> parse_line(const std::string& line)
 {
     std::stringstream ss(line);
@@ -19,8 +24,14 @@ std::vector<int> parse_line(const std::string& line)
     return res;
 }
 
-// TODO: exceptions
-Matrix<int> read_csv(const std::string& filename)
+/**
+ * @param filename path to a file containing a 4x4 matrix
+ *                 of integers. Each row should be separated
+ *                 by a newline and each entry by a comma
+ * @return a 4x4 Matrix of ints with the matrix described
+ *         in the csv file
+ */
+Matrix<int, 4> read_csv(const std::string& filename)
 {
     std::ifstream fs(filename);
     if (!fs.good())
@@ -36,7 +47,7 @@ Matrix<int> read_csv(const std::string& filename)
             std::cout << j << ",";
         std::cout << std::endl;
     }
-    return Matrix<int>(v);
+    return Matrix<int, 4>(v);
 }
 
 int main(int argc, char* argv[])
@@ -48,10 +59,9 @@ int main(int argc, char* argv[])
     }
 
     auto filename = argv[1];
-    Matrix<int> mx;
     try
     {
-        mx = read_csv(filename);  
+        auto mx = read_csv(filename);
         std::cout << mx << std::endl;
     }
     catch (const std::exception& ex)

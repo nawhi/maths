@@ -1,12 +1,4 @@
 #include "matrix.h"
-
-const Matrix<int> IDENTITY = {
-    1, 0, 0, 0,
-    0, 1, 0, 0,
-    0, 0, 1, 0,
-    0, 0, 0, 1
-};
-
 /**
  * @param mx input matrix
  * @param r_from the row to add from
@@ -17,11 +9,11 @@ const Matrix<int> IDENTITY = {
  *         the row with index r_from to the row 
  *         with index r_to
  */
-template<typename T>
-Matrix<T> add_row_multiple(const Matrix<T>& mx, int r_from, int r_to, T factor)
+template<typename T, int size>
+Matrix<T, size> add_row_multiple(const Matrix<T, size>& mx, int r_from, int r_to, T factor)
 {
     auto res = mx;
-    for (int col=0; col<4; col++)
+    for (int col=0; col<size; col++)
     {
         res.set(
             r_to, col,
@@ -40,16 +32,16 @@ Matrix<T> add_row_multiple(const Matrix<T>& mx, int r_from, int r_to, T factor)
  *        is an upper diagonal matrix with any numbers
  *        on the diagonal, and p.first * p.second == mx
  */
-template <typename T>
-std::pair<Matrix<T>, Matrix<T>> lu_decomp(Matrix<T> mx)
+template <typename T, int size>
+std::pair<Matrix<T, size>, Matrix<T, size>> lu_decomp(Matrix<T, size> mx)
 {
     // Begin with I * mx
-    Matrix<T> l = IDENTITY;
-    Matrix<T> u = mx;
+    Matrix<T, size> l = Matrix<T, size>::identity();
+    Matrix<T, size> u = mx;
 
-    for (int c = 0; c < 3 /* stop before final row */; c++)
+    for (int c = 0; c < size-1 /* stop before final row */; c++)
     {
-        for (int k = c+1; k < 4; k++)
+        for (int k = c+1; k < size; k++)
         {
             // What's needed to eliminate position (c+k, c)?
             T factor = u(k, c) / u(c, c);
