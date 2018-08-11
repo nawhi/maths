@@ -25,8 +25,8 @@ std::vector<int> parse_line(const std::string& line)
 }
 
 /**
- * @param filename path to a file containing a 4x4 matrix
- *                 of integers. Each row should be separated
+ * @param filename path to a csv style file containing a 4x4 
+ *                 matrix of ints. Each row should be separated
  *                 by a newline and each entry by a comma
  * @return a 4x4 Matrix of ints with the matrix described
  *         in the csv file
