@@ -5,7 +5,7 @@
  * @param r_to the row to add to
  * @param factor number by which to multiply r_from 
  *        before adding it to r_to
- * @return a new matrix formed by adding f times 
+ * @return a new matrix formed by adding factor times 
  *         the row with index r_from to the row 
  *         with index r_to
  */
@@ -43,7 +43,7 @@ std::pair<Matrix<T, size>, Matrix<T, size>> lu_decomp(Matrix<T, size> mx)
     {
         for (int k = c+1; k < size; k++)
         {
-            // What's needed to eliminate position (c+k, c)?
+            // What's needed to eliminate position (k, c)?
             T factor = u(k, c) / u(c, c);
 
             // Eliminate
