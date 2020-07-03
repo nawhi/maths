@@ -7,13 +7,25 @@
 
 #include <functional>
 #include <map>
+#include <iostream>
 
+template<typename T, typename U = T>
 class Lazy {
-    std::function<double(double)> func;
-    std::map<double, double> cache = {};
+    std::function<T(U)> func;
+    std::map<T, U> cache = {};
 public:
-    explicit Lazy(std::function<double(double)> f) : func(std::move(f)) {}
-    double operator () (double d);
+    explicit Lazy(std::function<T(U)> f) : func(std::move(f)) {}
+
+    U operator()(T t) {
+        const auto &hit = cache.find(t);
+        if (hit != cache.end()) {
+            std::cout << "cache hit" << std::endl;
+            return hit->second;
+        }
+        auto result = func(t);
+        cache[t] = result;
+        return result;
+    }
 };
 
 

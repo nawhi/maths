@@ -3,14 +3,17 @@
 //
 #include <lazy.h>
 #include "catch.hpp"
+#include <string>
+#include <vector>
 
 TEST_CASE("lazy executes the passed function") {
-    auto lazy = Lazy([](const double d) { return d + 1; });
+    auto lazy = Lazy<double>([](const auto d) { return d + 1; });
     CHECK( lazy(1) == 2 );
 }
 
 TEST_CASE("lazy serves result from cache if same result") {
-    auto lazy = Lazy([](const double d) { return d + 1; });
+    auto lazy = Lazy<double>([](const auto d) { return d + 1; });
     CHECK( lazy(1) == 2 );
     CHECK( lazy(1) == 2 );
 }
+
