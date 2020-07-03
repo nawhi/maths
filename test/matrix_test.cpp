@@ -1,7 +1,7 @@
 
-#include "catch.hpp"
-#include "../src/matrix.h"
-#include "../src/lu-decomp.h"
+#include "include/catch.hpp"
+#include "../include/matrix.h"
+#include "../include/lu-decomp.h"
 
 
 Matrix<int, 4> zero = {
