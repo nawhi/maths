@@ -4,9 +4,19 @@ using linalg::vectors::norm;
 using linalg::vectors::len;
 
 TEST_CASE("Length of a vector", "[len]") {
-    SECTION("length of a 1d vector") {
+    SECTION("1d vector") {
+        CHECK(len({0}) == 0);
         CHECK(len({1}) == 1);
         CHECK(len({2}) == 2);
+    }
+
+    SECTION("2d vector") {
+        CHECK(len({0, 1}) == 1);
+        CHECK(len({3, 4}) == 5);
+    }
+
+    SECTION("arbitrary length vectors") {
+        CHECK(len({2, 3, 6}) == 7);
     }
 }
 
