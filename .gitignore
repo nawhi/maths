@@ -1,4 +1,12 @@
+# Build folders
 build
 build/*
+
+# CMake
+cmake-build-debug
+
+# IntelliJ
+.idea
+
 *.sublime-project
 *.sublime-workspace
