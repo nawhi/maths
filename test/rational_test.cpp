@@ -1,5 +1,8 @@
 #include "catch.hpp"
 #include <rational.h>
+#include <sstream>
+
+// to do:
 // add
 // subtract
 // multiply
@@ -8,6 +11,8 @@
 // pow
 // gt, ge, lt, le
 // ostream
+// cast to floating point
+// cast to int(?)
 
 TEST_CASE("gcd (Euclid)", "[gcd]") {
     CHECK(gcd<int>(1, 0) == 1);
@@ -25,4 +30,15 @@ TEST_CASE("Rational class equality", "[rational]") {
     CHECK(Rational<int>(14, 26) == Rational<int>(28, 52));
 }
 
+void test_string_repr(Rational<int> r, const std::string& expected) {
+    std::stringstream ss;
+    ss << r;
+    CHECK(ss.str() == expected);
+}
+TEST_CASE("Rational class string representation", "[rational]") {
+    test_string_repr(Rational<int>(1, 2), "1/2");
+    test_string_repr(Rational<int>(2, 4), "1/2");
+    test_string_repr(Rational<int>(1), "1");
+    test_string_repr(Rational<int>(4, 2), "2");
+}
 
