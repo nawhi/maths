@@ -16,7 +16,9 @@ TEST_CASE("Length of a vector", "[len]") {
 }
 
 TEST_CASE("Normalizing a vector sets it to length 1", "[norm]") {
-    CHECK(norm({1}) == std::vector<int>{1});
-    CHECK(norm({2}) == std::vector<int>{1});
-    CHECK(norm({1, 1}) == std::vector<int>{1, 1});
+    CHECK(norm<int>({1}) == std::vector<int>{1});
+    CHECK(norm<int>({2}) == std::vector<int>{1});
+    CHECK(norm<int>({1, 1}) == std::vector<int>{1, 1});
+    CHECK(norm<int>({2, 2}) == std::vector<int>{1, 1});
+    CHECK(norm<double>({3., 4.}) == std::vector<double>{0.6, 0.8});
 }

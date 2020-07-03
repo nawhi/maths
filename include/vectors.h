@@ -11,11 +11,12 @@ namespace linalg::vectors {
         return sqrt(sum_squares);
     }
 
-    std::vector<int> norm(const std::vector<int> &input) {
+    template<typename T>
+    std::vector<T> norm(const std::vector<T> &input) {
         const auto l = len(input);
         auto result = input;
         std::transform(result.begin(), result.end(), result.begin(),
-                       [&l](const int &i) { return i / l; });
+                       [&l](const T &i) { return i / l; });
         return result;
     }
 }
