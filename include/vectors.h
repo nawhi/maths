@@ -2,11 +2,12 @@
 
 namespace linalg::vectors {
 
-    int len(const std::vector<int>& input) {
-        int sum_squares = std::reduce(
+    template <typename T>
+    T len(const std::vector<T>& input) {
+        auto sum_squares = std::reduce(
                 input.begin(),
                 input.end(),
-                0, [](const int &acc, const int& prev) { return acc + prev * prev; });
+                0, [](const T &acc, const T& prev) { return acc + prev * prev; });
         return sqrt(sum_squares);
     }
 

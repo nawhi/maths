@@ -4,20 +4,14 @@ using linalg::vectors::norm;
 using linalg::vectors::len;
 
 TEST_CASE("Length of a vector", "[len]") {
-    SECTION("1d vector") {
-        CHECK(len({0}) == 0);
-        CHECK(len({1}) == 1);
-        CHECK(len({2}) == 2);
-    }
+        CHECK(len<int>({0}) == 0);
+        CHECK(len<int>({1}) == 1);
+        CHECK(len<int>({2}) == 2);
+        CHECK(len<int>({0, 1}) == 1);
+        CHECK(len<int>({3, 4}) == 5);
+        CHECK(len<int>({2, 3, 6}) == 7);
 
-    SECTION("2d vector") {
-        CHECK(len({0, 1}) == 1);
-        CHECK(len({3, 4}) == 5);
-    }
-
-    SECTION("arbitrary length vectors") {
-        CHECK(len({2, 3, 6}) == 7);
-    }
+        CHECK(len<double>({12., 16., 21.}) == 29.);
 }
 
 TEST_CASE("Normalizing a vector", "[norm]") {
