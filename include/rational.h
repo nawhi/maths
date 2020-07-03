@@ -15,7 +15,7 @@ private:
 public:
     explicit Rational(const I &&n) : num(n), denom(1) {}
 
-    Rational(const I &&n, const I &&d) : num(n), denom(1) {}
+    Rational(const I &&n, const I &&d) : num(n / gcd(n, d)), denom(d / gcd(n, d)) {}
 
     bool operator==(const Rational &other) const {
         return num == other.num && denom == other.denom;

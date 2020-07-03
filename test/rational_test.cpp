@@ -19,13 +19,10 @@ TEST_CASE("gcd (Euclid)", "[gcd]") {
 }
 
 TEST_CASE("Rational class equality", "[rational]") {
-    SECTION("trivial examples") {
-        CHECK(Rational<int>(1) == Rational<int>(1));
-        CHECK(Rational<int>(1, 2) == Rational<int>(1, 2));
-    }
-
-    SECTION("multiples") {
-        CHECK(Rational<int>(2, 4) == Rational<int>(1, 2));
-    }
+    CHECK(Rational<int>(1) == Rational<int>(1));
+    CHECK(Rational<int>(1, 2) == Rational<int>(1, 2));
+    CHECK(Rational<int>(2, 4) == Rational<int>(1, 2));
+    CHECK(Rational<int>(14, 26) == Rational<int>(28, 52));
 }
+
 
