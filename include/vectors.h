@@ -12,7 +12,7 @@ namespace linalg::vectors {
     }
 
     std::vector<int> norm(const std::vector<int>& input) {
-        return input;
+        return { input[0] / len(input) };
     }
 }
 
