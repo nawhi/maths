@@ -10,7 +10,6 @@
 // equal
 // pow
 // gt, ge, lt, le
-// ostream
 // cast to floating point
 // cast to int(?)
 
@@ -28,6 +27,14 @@ TEST_CASE("Rational class equality", "[rational]") {
     CHECK(Rational<int>(1, 2) == Rational<int>(1, 2));
     CHECK(Rational<int>(2, 4) == Rational<int>(1, 2));
     CHECK(Rational<int>(14, 26) == Rational<int>(28, 52));
+
+    CHECK(Rational<int>(1, 2) != Rational<int>(2, 1));
+
+    SECTION("implicit conversions") {
+        CHECK(Rational<int>(1) == 1);
+        CHECK(Rational<int>(1, 1) == 1);
+        CHECK(Rational<int>(2, 4) != 2);
+    }
 }
 
 void test_string_repr(Rational<int> r, const std::string& expected) {
@@ -41,4 +48,13 @@ TEST_CASE("Rational class string representation", "[rational]") {
     test_string_repr(Rational<int>(1), "1");
     test_string_repr(Rational<int>(4, 2), "2");
 }
+
+//TEST_CASE("Adding Rationals") {
+    // Rational + Rational
+    // Rational + int
+    // int + Rational
+    // Rational += Rational
+    // Rational += int
+    // int += Rational (?)
+//}
 

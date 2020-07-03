@@ -23,6 +23,14 @@ public:
         return num == other.num && denom == other.denom;
     }
 
+    bool operator==(const int &i) const {
+        return denom == 1 && num == i;
+    }
+
+    bool operator!=(const Rational &other) const { return !(*this == other); }
+
+    bool operator!=(const int &i) const { return !(*this == i); }
+
     friend std::ostream &operator<<(std::ostream &os, Rational<I> r) {
         os << r.num;
         if (r.denom != 1)
