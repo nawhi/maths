@@ -1,10 +1,8 @@
 #ifndef MATRIX_RATIONALS_H
 #define MATRIX_RATIONALS_H
-#include <iostream>
 
 template<typename I>
 I gcd(I a, I b) {
-    std::cout << "gcd(" << a << "," << b << ")" << std::endl;
     if (b == 0) return a;
     return gcd(b, a % b);
 }
