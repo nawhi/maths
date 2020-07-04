@@ -1,5 +1,5 @@
 #include "catch.hpp"
-#include <rational.h>
+#include <fraction.h>
 #include <sstream>
 
 // to do:
