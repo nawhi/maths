@@ -26,6 +26,7 @@ TEST_CASE("gcd", "[gcd]") {
 TEST_CASE("Fraction equality", "[rational]") {
     SECTION("Fraction == Fraction") {
         CHECK(Fraction<int>(1) == Fraction<int>(1));
+        CHECK(Fraction<int>(2) == Fraction<int>(2));
         CHECK(Fraction<int>(1, 2) == Fraction<int>(1, 2));
         CHECK(Fraction<int>(2, 4) == Fraction<int>(1, 2));
         CHECK(Fraction<int>(14, 26) == Fraction<int>(28, 52));
@@ -71,13 +72,14 @@ TEST_CASE("Fraction multiplication") {
         CHECK(Fraction<int>(1) * 2 == 2);
         CHECK(Fraction<int>(4, 3) * 3 == 4);
         CHECK(Fraction<int>(3, 8) * 4 == Fraction<int>(3, 2));
-
         CHECK(2 * Fraction<int>(1) == 2);
     }
 
-//    SECTION("Fraction * Fraction") {
-//        CHECK(Fraction<int>(4) * Fraction<int>(2) == 8);
-//    }
+    SECTION("Fraction * Fraction") {
+        CHECK(Fraction<int>(4) * Fraction<int>(2) == 8);
+        CHECK(Fraction<int>(2, 8) * Fraction<int>(3, 5) == Fraction<int>(3, 20));
+    }
+
 //     Fraction + Fraction
 //     Fraction + int
 //     int + Fraction

@@ -19,6 +19,10 @@ private:
         return Fraction(num * other, denom);
     }
 
+    Fraction times(const Fraction &other) const {
+        return Fraction(num * other.num, denom * other.denom);
+    }
+
 
 public:
     explicit Fraction(const I n, const I d = 1) : num(n / gcd(n, d)), denom(d / gcd(n, d)) {}
@@ -52,7 +56,7 @@ public:
     }
 
     friend Fraction operator*(const I &lhs, const Fraction rhs) {
-        return rhs * lhs;
+        return rhs.times(lhs);
     }
 
     friend std::ostream &operator<<(std::ostream &os, Fraction<I> r) {
