@@ -2,18 +2,6 @@
 #include <fraction.h>
 #include <sstream>
 
-// to do:
-// add
-// subtract
-// multiply
-// divide
-// equal
-// pow
-// gt, ge, lt, le
-// *=, +=, /= (?)
-// cast to floating point
-// cast to int(?)
-
 TEST_CASE("gcd", "[gcd]") {
     CHECK(gcd<int>(1, 0) == 1);
     CHECK(gcd<int>(1, 1) == 1);
@@ -79,12 +67,17 @@ TEST_CASE("Fraction multiplication") {
         CHECK(Fraction<int>(4) * Fraction<int>(2) == 8);
         CHECK(Fraction<int>(2, 8) * Fraction<int>(3, 5) == Fraction<int>(3, 20));
     }
+}
 
-//     Fraction + Fraction
-//     Fraction + int
-//     int + Fraction
-//     Fraction += Fraction
-//     Fraction += int
-//     int += Fraction (?)
+TEST_CASE("Fraction division") {
+    SECTION("Fraction / I") {
+        CHECK(Fraction<int>(2) / 2 == 1);
+        CHECK(Fraction<int>(1, 9) / 9 == Fraction<int>(1, 81));
+    }
+
+    SECTION("I / Fraction") {
+        CHECK(Fraction<int>(9) / Fraction<int>(9) == Fraction<int>(1));
+        CHECK(Fraction<int>(5, 9) / Fraction<int>(3, 8) == Fraction<int>(40, 27));
+    }
 }
 

@@ -11,19 +11,6 @@ I gcd(I a, I b) {
 
 template<typename I>
 class Fraction {
-private:
-    I num;
-    I denom;
-
-    Fraction times(const I &other) const {
-        return Fraction(num * other, denom);
-    }
-
-    Fraction times(const Fraction &other) const {
-        return Fraction(num * other.num, denom * other.denom);
-    }
-
-
 public:
     explicit Fraction(const I n, const I d = 1) : num(n / gcd(n, d)), denom(d / gcd(n, d)) {}
 
@@ -45,7 +32,7 @@ public:
 
     bool operator!=(const Fraction &other) const { return !(*this == other); }
 
-    bool operator!=(const int &i) const { return !(*this == i); }
+    bool operator!=(const I &i) const { return !(*this == i); }
 
     Fraction operator*(const I &other) const {
         return times(other);
@@ -59,11 +46,39 @@ public:
         return rhs.times(lhs);
     }
 
+    Fraction operator/(const I& other) const {
+        return div(other);
+    }
+
+    Fraction operator/(const Fraction& other) const {
+        return div(other);
+    }
+
     friend std::ostream &operator<<(std::ostream &os, Fraction<I> r) {
         os << r.num;
         if (r.denom != 1)
             os << "/" << r.denom;
         return os;
+    }
+
+private:
+    I num;
+    I denom;
+
+    Fraction times(const I &other) const {
+        return Fraction(num * other, denom);
+    }
+
+    Fraction times(const Fraction &other) const {
+        return Fraction(num * other.num, denom * other.denom);
+    }
+
+    Fraction div(const I &other) const {
+        return Fraction(num, denom * other);
+    }
+
+    Fraction div(const Fraction &other) const {
+        return Fraction(num * other.denom, denom * other.num);
     }
 };
 
