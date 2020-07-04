@@ -10,16 +10,16 @@ I gcd(I a, I b) {
 }
 
 template<typename I>
-class Rational {
+class Fraction {
 private:
     I num;
     I denom;
 public:
-    explicit Rational(const I &&n) : num(n), denom(1) {}
+    explicit Fraction(const I &&n) : num(n), denom(1) {}
 
-    Rational(const I &&n, const I &&d) : num(n / gcd(n, d)), denom(d / gcd(n, d)) {}
+    Fraction(const I &&n, const I &&d) : num(n / gcd(n, d)), denom(d / gcd(n, d)) {}
 
-    bool operator==(const Rational &other) const {
+    bool operator==(const Fraction &other) const {
         return num == other.num && denom == other.denom;
     }
 
@@ -27,11 +27,11 @@ public:
         return denom == 1 && num == i;
     }
 
-    bool operator!=(const Rational &other) const { return !(*this == other); }
+    bool operator!=(const Fraction &other) const { return !(*this == other); }
 
     bool operator!=(const int &i) const { return !(*this == i); }
 
-    friend std::ostream &operator<<(std::ostream &os, Rational<I> r) {
+    friend std::ostream &operator<<(std::ostream &os, Fraction<I> r) {
         os << r.num;
         if (r.denom != 1)
             os << "/" << r.denom;
