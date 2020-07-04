@@ -19,7 +19,6 @@ public:
     U operator()(T t) {
         const auto &hit = cache.find(t);
         if (hit != cache.end()) {
-            std::cout << "cache hit" << std::endl;
             return hit->second;
         }
         auto result = func(t);

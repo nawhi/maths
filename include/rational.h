@@ -23,8 +23,16 @@ public:
         return num == other.num && denom == other.denom;
     }
 
-    bool operator==(const int &i) const {
+    bool operator==(const I &i) const {
         return denom == 1 && num == i;
+    }
+
+    friend bool operator==(const I& lhs, const Fraction& rhs) {
+        return rhs == lhs;
+    }
+
+    friend bool operator!=(const I& lhs, const Fraction& rhs) {
+        return rhs != lhs;
     }
 
     bool operator!=(const Fraction &other) const { return !(*this == other); }
