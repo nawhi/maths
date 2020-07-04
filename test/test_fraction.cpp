@@ -10,6 +10,7 @@
 // equal
 // pow
 // gt, ge, lt, le
+// *=, +=, /= (?)
 // cast to floating point
 // cast to int(?)
 
@@ -65,12 +66,23 @@ TEST_CASE("Fraction stream overload", "[rational]") {
     test_string_repr<long>(Fraction<long>(3000000000L), "3000000000");
 }
 
-//TEST_CASE("Adding Rationals") {
-    // Fraction + Fraction
-    // Fraction + int
-    // int + Fraction
-    // Fraction += Fraction
-    // Fraction += int
-    // int += Fraction (?)
-//}
+TEST_CASE("Fraction multiplication") {
+    SECTION("Fraction * I") {
+        CHECK(Fraction<int>(1) * 2 == 2);
+        CHECK(Fraction<int>(4, 3) * 3 == 4);
+        CHECK(Fraction<int>(3, 8) * 4 == Fraction<int>(3, 2));
+
+        CHECK(2 * Fraction<int>(1) == 2);
+    }
+
+//    SECTION("Fraction * Fraction") {
+//        CHECK(Fraction<int>(4) * Fraction<int>(2) == 8);
+//    }
+//     Fraction + Fraction
+//     Fraction + int
+//     int + Fraction
+//     Fraction += Fraction
+//     Fraction += int
+//     int += Fraction (?)
+}
 
