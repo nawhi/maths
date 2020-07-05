@@ -108,7 +108,30 @@ TEST_CASE("Fraction addition", "[fraction]") {
         CHECK(Fraction<int>(3, 4) + 2 == Fraction<int>(11, 4));
         CHECK(1 + Fraction<int>(1) == 2);
     }
+
+    SECTION("Unary plus") {
+        CHECK(Fraction<int>(1) == +Fraction<int>(1));
+    }
 }
+
+TEST_CASE("Fraction subtraction", "[fraction]") {
+    SECTION("Fraction - Fraction") {
+        CHECK(Fraction<int>(2) - Fraction<int>(1) == 1);
+        CHECK(Fraction<int>(1, 2) - Fraction<int>(1, 4) == Fraction<int>(1, 4));
+        CHECK(Fraction<int>(7, 9) - Fraction<int>(4, 13) == Fraction<int>(55, 117));
+        CHECK(Fraction<int>(3, 9) - Fraction<int>(5, 9) == Fraction<int>(-2, 9));
+    }
+
+    SECTION("Fraction - I") {
+        CHECK(Fraction<int>(1) - 1 == 0);
+        CHECK(Fraction<int>(3, 9) - 2 == Fraction<int>(-15, 9));
+    }
+
+    SECTION("Unary minus") {
+        CHECK(Fraction<int>(-1) == -Fraction<int>(1));
+    }
+}
+
 
 TEST_CASE("Zero fractions", "[fraction]") {
     CHECK_THROWS_AS(Fraction<int>(1, 0), fractions::bad_fraction);

@@ -91,13 +91,25 @@ namespace fractions {
             return plus(other);
         }
 
-        friend Fraction operator+(const I& lhs, const Fraction& rhs) {
+        friend Fraction operator+(const I &lhs, const Fraction &rhs) {
             return rhs.plus(lhs);
         }
 
-//        Fraction operator-(const Fraction& other) const {
-//            return minus(other)
-//        }
+        Fraction operator+() {
+            return *this;
+        }
+
+        Fraction operator-(const Fraction &other) const {
+            return minus(other);
+        }
+
+        Fraction operator-(const I& other) const {
+            return minus(other);
+        }
+
+        Fraction operator-() {
+            return Fraction(-num, denom);
+        }
 
         friend std::ostream &operator<<(std::ostream &os, Fraction<I> r) {
             os << r.num;
@@ -134,6 +146,16 @@ namespace fractions {
 
         Fraction plus(const I &other) const {
             return Fraction(num + other * denom, denom);
+        }
+
+        Fraction minus(const Fraction &other) const {
+            const I lcm = lowest_common_multiple(denom, other.denom);
+            const I new_num = num * (lcm / denom) - other.num * (lcm / other.denom);
+            return Fraction(new_num, denom * lcm / denom);
+        }
+
+        Fraction minus(const I &other) const {
+            return Fraction(num - other * denom, denom);
         }
     };
 
