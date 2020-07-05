@@ -2,24 +2,24 @@
 #include <fraction.h>
 #include <sstream>
 
-using fractions::gcd, fractions::lcm, fractions::Fraction;
+using fractions::greatest_common_divisor, fractions::lowest_common_multiple, fractions::Fraction;
 
-TEST_CASE("gcd") {
-    CHECK(gcd<int>(1, 0) == 1);
-    CHECK(gcd<int>(1, 1) == 1);
-    CHECK(gcd<int>(2, 2) == 2);
-    CHECK(gcd<int>(6, 3) == 3);
-    CHECK(gcd<int>(8, 12) == 4);
-    CHECK(gcd<int>(323, 437) == 19);
+TEST_CASE("greatest_common_divisor") {
+    CHECK(greatest_common_divisor<int>(1, 0) == 1);
+    CHECK(greatest_common_divisor<int>(1, 1) == 1);
+    CHECK(greatest_common_divisor<int>(2, 2) == 2);
+    CHECK(greatest_common_divisor<int>(6, 3) == 3);
+    CHECK(greatest_common_divisor<int>(8, 12) == 4);
+    CHECK(greatest_common_divisor<int>(323, 437) == 19);
 
 }
 
-TEST_CASE("lcm", "[lcm]") {
-    CHECK(lcm<int>(1, 1) == 1);
-    CHECK(lcm<int>(2, 2) == 2);
-    CHECK(lcm<int>(3, 5) == 15);
-    CHECK(lcm<int>(39, 13) == 39);
-    CHECK(lcm<int>(8, 12) == 24);
+TEST_CASE("lowest_common_multiple", "[lowest_common_multiple]") {
+    CHECK(lowest_common_multiple<int>(1, 1) == 1);
+    CHECK(lowest_common_multiple<int>(2, 2) == 2);
+    CHECK(lowest_common_multiple<int>(3, 5) == 15);
+    CHECK(lowest_common_multiple<int>(39, 13) == 39);
+    CHECK(lowest_common_multiple<int>(8, 12) == 24);
 }
 
 TEST_CASE("Fraction equality", "[fraction]") {
@@ -92,6 +92,13 @@ TEST_CASE("Fraction division", "[fraction]") {
         CHECK(Fraction<int>(9) / Fraction<int>(9) == Fraction<int>(1));
         CHECK(Fraction<int>(5, 9) / Fraction<int>(3, 8) == Fraction<int>(40, 27));
     }
+}
+
+TEST_CASE("Fraction addition", "[fraction]") {
+    CHECK(Fraction<int>(1) + Fraction<int>(1) == Fraction<int>(2));
+    CHECK(Fraction<int>(1, 3) + Fraction<int>(2, 3) == Fraction<int>(1));
+    CHECK(Fraction<int>(4, 9) + Fraction<int>(7, 13) == Fraction<int>(115, 117));
+    CHECK(Fraction<int>(9, 8) + Fraction<int>(10, 9) == Fraction<int>(161, 72));
 }
 
 TEST_CASE("Zero fractions", "[fraction]") {

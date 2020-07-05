@@ -6,19 +6,19 @@
 namespace fractions {
 
     template<typename I>
-    I gcd(I a, I b) {
+    I greatest_common_divisor(I a, I b) {
         if (b == 0) return a;
-        return gcd(b, a % b);
+        return greatest_common_divisor(b, a % b);
     }
 
-    template <typename I>
+    template<typename I>
     I abs(I i) {
         return i < 0 ? -i : i;
     }
 
-    template <typename I>
-    I lcm(I a, I b) {
-        return (abs(a) / gcd(a, b)) * b;
+    template<typename I>
+    I lowest_common_multiple(I a, I b) {
+        return (abs(a) / greatest_common_divisor(a, b)) * b;
     }
 
     class bad_fraction : std::exception {
@@ -38,9 +38,9 @@ namespace fractions {
             if (denominator == 0) {
                 throw bad_fraction("denominator cannot be zero");
             }
-            I divisor = gcd(numerator, denominator);
-            num = numerator / divisor;
-            denom = denominator / divisor;
+            I gcd = greatest_common_divisor(numerator, denominator);
+            num = numerator / gcd;
+            denom = denominator / gcd;
         }
 
         bool operator==(const Fraction &other) const {
@@ -83,6 +83,10 @@ namespace fractions {
             return div(other);
         }
 
+        Fraction operator+(const Fraction &other) const {
+            return add(other);
+        }
+
         friend std::ostream &operator<<(std::ostream &os, Fraction<I> r) {
             os << r.num;
             if (r.denom != 1)
@@ -108,6 +112,12 @@ namespace fractions {
 
         Fraction div(const Fraction &other) const {
             return Fraction(num * other.denom, denom * other.num);
+        }
+
+        Fraction add(const Fraction &other) const {
+            const I lcm = lowest_common_multiple(denom, other.denom);
+            const I new_num = num * (lcm / denom) + other.num * (lcm / other.denom);
+            return Fraction(new_num, denom * lcm / denom);
         }
     };
 
