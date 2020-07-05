@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <sstream>
+#include <functional>
 
 namespace vectors {
 
@@ -23,7 +24,7 @@ namespace vectors {
             }
         }
 
-        I len() const {
+        I length() const {
             return sqrt(std::reduce(
                     elements.begin(),
                     elements.end(),
@@ -31,39 +32,28 @@ namespace vectors {
         }
 
         Vector norm() const {
-            const auto l = len();
-            auto result = elements;
-            std::transform(result.begin(), result.end(), result.begin(),
-                           [&l](const I &i) { return i / l; });
-            return Vector(result);
+            const auto len = length();
+            return map([&len](const I &i) { return i / len; });
         }
 
-        bool operator==(const Vector& other) const {
+        bool operator==(const Vector &other) const {
             return elements == other.elements;
         }
 
-        bool operator!=(const Vector& other) const {
+        bool operator!=(const Vector &other) const {
             return elements != other.elements;
         }
 
-        Vector operator+(const Vector& other) const {
-            check_dims_match(other);
-            std::vector<I> result(other.dimension);
-            std::transform(elements.begin(), elements.end(), other.elements.begin(), result.begin(),
-                           [](const I &e, const I &o) { return e + o; });
-            return Vector(result);
+        Vector operator+(const Vector &other) const {
+            return combine(other, [](const I &i, const I &j) { return i + j; });
         }
 
-        Vector operator-(Vector other) const {
-            check_dims_match(other);
-            std::vector<I> result(other.dimension);
-            std::transform(elements.begin(), elements.end(), other.elements.begin(), result.begin(),
-                           [](const I &e, const I &o) { return e - o; });
-            return Vector(result);
+        Vector operator-(const Vector other) const {
+            return combine(other, [](const I &i, const I &j) { return i - j; });
         }
 
-        Vector operator*(I other) const {
-
+        Vector operator*(const I i) const {
+            return map([&i](const I &e) { return e * i; });
         }
 
         friend std::ostream &operator<<(std::ostream &os, const Vector &v) {
@@ -74,14 +64,28 @@ namespace vectors {
         }
 
     private:
+
         explicit Vector(std::vector<I> elems) : elements(elems), dimension(elems.size()) {}
 
-        void check_dims_match(const Vector& other) const {
+        void check_dims_match(const Vector &other) const {
             I our_dim = dimension;
             I their_dim = other.dimension;
             if (their_dim != our_dim) {
                 throw dimension_mismatch();
             }
+        }
+
+        Vector map(std::function<I(I)> op) const {
+            std::vector<I> result(dimension);
+            std::transform(elements.begin(), elements.end(), result.begin(), op);
+            return Vector(result);
+        }
+
+        Vector combine(Vector other, std::function<I(I, I)> binary_op) const {
+            check_dims_match(other);
+            std::vector<I> result(other.dimension);
+            std::transform(elements.begin(), elements.end(), other.elements.begin(), result.begin(), binary_op);
+            return Vector(result);
         }
 
         const std::vector<I> elements;

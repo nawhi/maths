@@ -16,14 +16,14 @@ TEST_CASE("Vector equality", "[vector]") {
 }
 
 TEST_CASE("Length of a vector", "[vector]") {
-    CHECK(Vector<int>{0}.len() == 0);
-    CHECK(Vector<int>{1}.len() == 1);
-    CHECK(Vector<int>{2}.len() == 2);
-    CHECK(Vector<int>{0, 1}.len() == 1);
-    CHECK(Vector<int>{3, 4}.len() == 5);
-    CHECK(Vector<int>{2, 3, 6}.len() == 7);
+    CHECK(Vector<int>{0}.length() == 0);
+    CHECK(Vector<int>{1}.length() == 1);
+    CHECK(Vector<int>{2}.length() == 2);
+    CHECK(Vector<int>{0, 1}.length() == 1);
+    CHECK(Vector<int>{3, 4}.length() == 5);
+    CHECK(Vector<int>{2, 3, 6}.length() == 7);
 
-    CHECK(Vector<double>({12., 16., 21.}).len() == 29.);
+    CHECK(Vector<double>({12., 16., 21.}).length() == 29.);
 }
 
 TEST_CASE("Normalizing a vector (set to length 1)", "[vector]") {
@@ -62,4 +62,5 @@ TEST_CASE("Vector-Vector subtraction", "[vector]") {
 
 TEST_CASE("Vector * Scalar", "[vector]") {
     CHECK(Vector<int>{1, 2, 3} * 2 == Vector<int>{2, 4, 6});
+    CHECK(Vector<double>{50., 50.} * (1./2) == Vector<double>{25., 25.} );
 }
