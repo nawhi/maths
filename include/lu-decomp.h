@@ -1,4 +1,4 @@
-#include "matrix.h"
+#include "Matrix.h"
 /**
  * @param mx input matrix
  * @param r_from the row to add from

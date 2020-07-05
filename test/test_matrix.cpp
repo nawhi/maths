@@ -1,6 +1,6 @@
 
 #include <catch.hpp>
-#include <matrix.h>
+#include <Matrix.h>
 #include <lu-decomp.h>
 
 

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include <matrix.h>
+#include <Matrix.h>
 
 /**
  * Read a comma-separated line of integers into a vector.

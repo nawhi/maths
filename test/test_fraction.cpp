@@ -1,6 +1,6 @@
 #include <catch.hpp>
-#include <fraction.h>
 #include <sstream>
+#include "Fraction.h"
 
 using fractions::greatest_common_divisor, fractions::lowest_common_multiple, fractions::Fraction;
 
