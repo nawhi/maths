@@ -10,6 +10,7 @@
 - [ ] `>=`
 - [ ] `<`
 - [ ] `<=`
+- [ ] always handle zero correctly
 - [ ] power (?)
 - [ ] `*=`, `+=`, `/=` (?)
 - [ ] cast to floating point (?)

@@ -2,6 +2,8 @@
 #include <fraction.h>
 #include <sstream>
 
+using fractions::gcd, fractions::Fraction;
+
 TEST_CASE("gcd", "[gcd]") {
     CHECK(gcd<int>(1, 0) == 1);
     CHECK(gcd<int>(1, 1) == 1);
@@ -81,3 +83,6 @@ TEST_CASE("Fraction division") {
     }
 }
 
+TEST_CASE("Zero fractions") {
+    CHECK_THROWS_AS(Fraction<int>(1, 0), fractions::bad_fraction);
+}
