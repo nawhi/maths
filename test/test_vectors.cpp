@@ -1,5 +1,5 @@
-#include "catch.hpp"
-#include <vectors.h>
+#include <catch.hpp>
+#include "vectors.h"
 
 using linalg::vectors::norm;
 using linalg::vectors::len;

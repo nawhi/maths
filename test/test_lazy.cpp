@@ -2,7 +2,7 @@
 // Created by Nick White on 03/07/2020.
 //
 #include <lazy.h>
-#include "catch.hpp"
+#include <catch.hpp>
 #include <string>
 #include <vector>
 

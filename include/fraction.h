@@ -95,9 +95,9 @@ namespace fractions {
             return rhs.plus(lhs);
         }
 
-        Fraction operator-(const Fraction& other) const {
-            return minus(other)
-        }
+//        Fraction operator-(const Fraction& other) const {
+//            return minus(other)
+//        }
 
         friend std::ostream &operator<<(std::ostream &os, Fraction<I> r) {
             os << r.num;
