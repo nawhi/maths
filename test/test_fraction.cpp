@@ -53,13 +53,14 @@ TEST_CASE("Fraction equality", "[fraction]") {
 }
 
 template<typename I>
-void test_string_repr(Fraction<I> r, const std::string& expected) {
+void test_string_repr(Fraction<I> r, const std::string &expected) {
     std::stringstream ss;
     ss << r;
     SECTION(expected) {
         CHECK(ss.str() == expected);
     }
 }
+
 TEST_CASE("Fraction stream overload", "[fraction]") {
     test_string_repr<int>(Fraction<int>(1, 2), "1/2");
     test_string_repr<int>(Fraction<int>(2, 4), "1/2");
@@ -95,10 +96,24 @@ TEST_CASE("Fraction division", "[fraction]") {
 }
 
 TEST_CASE("Fraction addition", "[fraction]") {
-    CHECK(Fraction<int>(1) + Fraction<int>(1) == Fraction<int>(2));
-    CHECK(Fraction<int>(1, 3) + Fraction<int>(2, 3) == Fraction<int>(1));
-    CHECK(Fraction<int>(4, 9) + Fraction<int>(7, 13) == Fraction<int>(115, 117));
-    CHECK(Fraction<int>(9, 8) + Fraction<int>(10, 9) == Fraction<int>(161, 72));
+    SECTION("Fraction + Fraction") {
+        CHECK(Fraction<int>(1) + Fraction<int>(1) == 2);
+        CHECK(Fraction<int>(1, 3) + Fraction<int>(2, 3) == 1);
+        CHECK(Fraction<int>(4, 9) + Fraction<int>(7, 13) == Fraction<int>(115, 117));
+        CHECK(Fraction<int>(9, 8) + Fraction<int>(10, 9) == Fraction<int>(161, 72));
+    }
+
+    SECTION("Fraction + I") {
+        CHECK(Fraction<int>(1) + 1 == 2);
+        CHECK(Fraction<int>(3, 4) + 2 == Fraction<int>(11, 4));
+        CHECK(1 + Fraction<int>(1) == 2);
+    }
+}
+
+TEST_CASE("Fraction subtraction", "[fraction]") {
+    SECTION("Fraction - Fraction") {
+        CHECK(Fraction<int>(2) - Fraction<int>(1) == 1);
+    }
 }
 
 TEST_CASE("Zero fractions", "[fraction]") {
