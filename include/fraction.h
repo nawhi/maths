@@ -105,11 +105,16 @@ namespace fractions {
         }
 
         bool operator>(const Fraction &other) const {
-            return gt(other);
+            const I lcm = lowest_common_multiple(denom, other.denom);
+            return num * (lcm / denom) > other.num * (lcm / other.denom);
         }
 
         bool operator>(const I &i) const {
             return num > i * denom;
+        }
+
+        friend bool operator>(const I& lhs, const Fraction& rhs) {
+            return !(lhs == rhs || rhs > lhs);
         }
 
         bool operator>=(const Fraction &other) const {
@@ -118,6 +123,34 @@ namespace fractions {
 
         bool operator>=(const I &i) const {
             return *this == i || *this > i;
+        }
+
+        friend bool operator>=(const I& lhs, const Fraction& rhs) {
+            return !(rhs > lhs);
+        }
+
+        bool operator<(const Fraction &other) const {
+            return other > *this;
+        }
+
+        bool operator<(const I &i) const {
+            return num < i * denom;
+        }
+
+        friend bool operator<(const I& lhs, const Fraction& rhs) {
+            return rhs > lhs;
+        }
+
+        bool operator<=(const Fraction &other) const {
+            return *this == other || other > *this;
+        }
+
+        bool operator<=(const I &i) const {
+            return *this == i || i > *this;
+        }
+
+        friend bool operator<=(const I& lhs, const Fraction& rhs) {
+            return !(lhs > rhs);
         }
 
         friend std::ostream &operator<<(std::ostream &os, Fraction<I> r) {
@@ -165,16 +198,6 @@ namespace fractions {
 
         Fraction minus(const I &other) const {
             return Fraction(num - other * denom, denom);
-        }
-
-        bool gt(const Fraction &other) const {
-            const I lcm = lowest_common_multiple(denom, other.denom);
-            return num * (lcm / denom) > other.num * (lcm / other.denom);
-        }
-
-        bool lt(const Fraction &other) const {
-            const I lcm = lowest_common_multiple(denom, other.denom);
-            return num * (lcm / denom) < other.num * (lcm / other.denom);
         }
     };
 

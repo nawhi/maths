@@ -132,7 +132,7 @@ TEST_CASE("Fraction subtraction", "[fraction]") {
     }
 }
 
-TEST_CASE("Fraction comparison", "[fraction]") {
+TEST_CASE("Fraction inequalities", "[fraction]") {
     CHECK(Fraction<int>(2) > Fraction<int>(1));
     CHECK(Fraction<int>(4, 3) > Fraction<int>(5, 4));
     CHECK(Fraction<int>(2) >= Fraction<int>(2));
@@ -141,7 +141,23 @@ TEST_CASE("Fraction comparison", "[fraction]") {
     CHECK(Fraction<int>(2) > 1);
     CHECK(Fraction<int>(2) >= 2);
     CHECK(Fraction<int>(2) >= 1);
-//    CHECK(2 > Fraction<int>(1));
+
+    CHECK(2 > Fraction<int>(1));
+    CHECK(2 >= Fraction<int>(2));
+    CHECK(2 >= Fraction<int>(1));
+
+    CHECK(Fraction<int>(1) < Fraction<int>(2));
+    CHECK(Fraction<int>(5, 4) < Fraction<int>(4, 3));
+    CHECK(Fraction<int>(2) <= Fraction<int>(2));
+    CHECK(Fraction<int>(1, 3) <= Fraction<int>(2, 3));
+
+    CHECK(1 < Fraction<int>(2));
+    CHECK(2 <= Fraction<int>(2));
+    CHECK(1 <= Fraction<int>(2));
+
+    CHECK(Fraction<int>(1) < 2);
+    CHECK(Fraction<int>(2) <= 2);
+    CHECK(Fraction<int>(1) <= 2);
 }
 
 

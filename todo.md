@@ -15,6 +15,7 @@
 - [ ] `*=`, `+=`, `/=` (?)
 - [ ] cast to floating point (?)
 - [ ] cast to int(?)
+- [ ] optimisations (?) e.g. the comparison methods
 
 ## Vectors
 with `Vector` class
