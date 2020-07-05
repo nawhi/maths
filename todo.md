@@ -6,16 +6,11 @@
 - [x] `/`
 - [x] `+`
 - [x] `-`
-- [ ] `>`
-- [ ] `>=`
-- [ ] `<`
-- [ ] `<=`
-- [ ] always handle zero correctly
-- [ ] power (?)
-- [ ] `*=`, `+=`, `/=` (?)
-- [ ] cast to floating point (?)
-- [ ] cast to int(?)
-- [ ] optimisations (?) e.g. the comparison methods
+- [x] `>`
+- [x] `>=`
+- [x] `<`
+- [x] `<=`
+- [x] always handle zero correctly
 
 ## Vectors
 with `Vector` class
