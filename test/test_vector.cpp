@@ -39,9 +39,23 @@ TEST_CASE("Vector stream overload", "[vector]") {
     CHECK((std::stringstream() << Vector<int>{1, 2}).str() == "[1, 2]");
 
     const auto &vector = Vector<Fraction<int>>{Fraction<int>{1, 2},
-                                                                Fraction<int>{2, 3},
-                                                                Fraction<int>{3, 4},
-                                                                Fraction<int>{4, 5},
-                                                                Fraction<int>{5, 6}};
+                                               Fraction<int>{2, 3},
+                                               Fraction<int>{3, 4},
+                                               Fraction<int>{4, 5},
+                                               Fraction<int>{5, 6}};
     CHECK((std::stringstream() << vector).str() == "[1/2, 2/3, 3/4, 4/5, 5/6]");
+}
+
+TEST_CASE("Vector-Vector addition", "[vector]") {
+    CHECK_THROWS_AS((Vector<int>{9} + Vector<int>{1, 1}), vectors::dimension_mismatch);
+
+    CHECK(Vector<int>{1} + Vector<int>{1} == Vector<int>{2});
+    CHECK((Vector<int>{4, 3, 5} + Vector<int>{1, 2, 3}) == Vector<int>{5, 5, 8});
+}
+
+TEST_CASE("Vector-Vector subtraction", "[vector]") {
+    CHECK_THROWS_AS((Vector<int>{9} - Vector<int>{1, 1}), vectors::dimension_mismatch);
+
+    CHECK(Vector<int>{1} - Vector<int>{1} == Vector<int>{0});
+    CHECK(((Vector<int>{1, 2, 3}) - (Vector<int>{4, 3, 2})) == Vector<int>{-3, -1, 1});
 }

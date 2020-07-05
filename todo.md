@@ -17,8 +17,8 @@ with `Vector` class
 - [x] Calculate length 
 - [x] Normalize (set length to 1)
 - [ ] Vector +/- scalar
-- [ ] Vector +/- Vector
-- [ ] Vector * scalar (inc 1/x)
+- [x] Vector +/- Vector
+- [ ] Vector * scalar (check 1/x too)
 - [ ] Dot product (`.dot()`)
 - [ ] Cross product (`.cross()`)
 - [ ] Change basis

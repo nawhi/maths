@@ -6,7 +6,11 @@
 
 namespace vectors {
 
-    class bad_vector: std::exception {};
+    class bad_vector : std::exception {
+    };
+
+    class dimension_mismatch : std::exception {
+    };
 
     template<typename I>
     class Vector {
@@ -34,18 +38,27 @@ namespace vectors {
             return Vector(result);
         }
 
-        bool operator==(Vector other) const {
+        bool operator==(const Vector& other) const {
             return elements == other.elements;
         }
 
-        bool operator!=(Vector other) const {
+        bool operator!=(const Vector& other) const {
             return elements != other.elements;
         }
 
-        Vector operator+(Vector other) const {
-            auto result = elements;
-            std::transform(result.begin(), result.end(), result.begin(), other.elements.begin(),
-                           [](const I &i1, const I &i2) { return i1 + i2; });
+        Vector operator+(const Vector& other) const {
+            check_dims_match(other);
+            std::vector<I> result(other.len());
+            std::transform(elements.begin(), elements.end(), other.elements.begin(), result.begin(),
+                           [](const I &e, const I &o) { return e + o; });
+            return Vector(result);
+        }
+
+        Vector operator-(Vector other) const {
+            check_dims_match(other);
+            std::vector<I> result(other.dimension);
+            std::transform(elements.begin(), elements.end(), other.elements.begin(), result.begin(),
+                           [](const I &e, const I &o) { return e - o; });
             return Vector(result);
         }
 
@@ -59,8 +72,16 @@ namespace vectors {
     private:
         explicit Vector(std::vector<I> elems) : elements(elems), dimension(elems.size()) {}
 
-        std::vector<I> elements;
-        I dimension;
+        void check_dims_match(const Vector& other) const {
+            I our_dim = dimension;
+            I their_dim = other.dimension;
+            if (their_dim != our_dim) {
+                throw dimension_mismatch();
+            }
+        }
+
+        const std::vector<I> elements;
+        const I dimension;
     };
 
 }
