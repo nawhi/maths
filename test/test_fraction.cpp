@@ -110,12 +110,6 @@ TEST_CASE("Fraction addition", "[fraction]") {
     }
 }
 
-//TEST_CASE("Fraction subtraction", "[fraction]") {
-//    SECTION("Fraction - Fraction") {
-//        CHECK(Fraction<int>(2) - Fraction<int>(1) == 1);
-//    }
-//}
-
 TEST_CASE("Zero fractions", "[fraction]") {
     CHECK_THROWS_AS(Fraction<int>(1, 0), fractions::bad_fraction);
 }

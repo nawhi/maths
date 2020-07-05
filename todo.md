@@ -4,7 +4,7 @@
 - [x] `==`
 - [x] `*`
 - [x] `/`
-- [ ] `+`
+- [x] `+`
 - [ ] `-`
 - [ ] `>`
 - [ ] `>=`
@@ -18,42 +18,43 @@
 
 ## Vectors
 with `Vector` class
+- [ ] Calculate length 
+- [ ] Normalize (set length to 1)
 - [ ] Vector +/- scalar
 - [ ] Vector +/- Vector
-- [ ] Vector */div scalar
-- [ ] Dot product
-- [ ] Cross product
-- [ ] Change to a given basis
-- [ ] Change to standard basis from a given basis
-- [x] Calculate length of a vector 
-- [x] Normalize a vector (set length to 1)
+- [ ] Vector * scalar (inc 1/x)
+- [ ] Dot product (`.dot()`)
+- [ ] Cross product (`.cross()`)
+- [ ] Change basis
 - [ ] Gram-Schmidt process - make a basis set orthonormal  
 
 ## Matrices
 with `Matrix` class
-- [ ] Matrix * scalar, Matrix / scalar
-- [ ] Matrix * vector
-- [ ] Matrix * matrix
-- [ ] Matrix + matrix
-- [ ] Find eigenvalues of a matrix (via characteristic polynomial / power rule?)
-- [ ] Find the eigenvectors of a matrix using power rule approximation
+- [ ] Compute matrix plus/minus:
+  - [ ] scalar
+  - [ ] vector
+  - [ ] matrix
+- Compute matrix times:
+  - [ ] scalar (inc 1/x)
+  - [ ] vector
+  - [ ] matrix
+- [ ] Find eigenvalues of a matrix
+  - [ ] characteristic polynomail
+  - [ ] power rule
 - [ ] Test if given vector is an eigenvector of given matrix
 - [ ] Change a matrix to its eigenbasis (?)
 - [ ] Compute matrix to the power N:
   - [ ] brute-force
   - [ ] by changing to the eigenbasis (with exception if not possible)
-- [ ] Compute matrix multiplied by:
-  - [ ] scalar
-  - [ ] vector
-  - [ ] matrix
-- [ ] Compute inverse of a matrix using Gaussian elimination
-  - [ ] 2-sided
-  - [ ] 3-sided
-  - [ ] n-sided
+- [ ] Compute inverse
+  - [ ] with Gaussian elimination
 - [ ] Calculate rotation matrix for a given angle
-- [ ] Calculate LU-decomposition of a matrix
-- [ ] Calculate determinant of a matrix
+- [ ] Calculate LU-decomposition
+- [ ] Calculate determinant
   - [ ] using QR-decomposition
   - [ ] brute-force
+- [ ] Calculate null space
+  
+## Systems
 - [ ] Solve a system using Cramer’s rule
 - [ ] Solve a system using Gaussian elimination
