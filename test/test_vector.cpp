@@ -64,3 +64,9 @@ TEST_CASE("Vector * Scalar", "[vector]") {
     CHECK(Vector<int>{1, 2, 3} * 2 == Vector<int>{2, 4, 6});
     CHECK(Vector<double>{50., 50.} * (1./2) == Vector<double>{25., 25.} );
 }
+
+TEST_CASE("Vector dot Vector", "[vector]") {
+    CHECK(Vector<int>{1}.dot(Vector<int>{1}) == 1);
+    CHECK(Vector<int>{1, 2}.dot(Vector<int>{2, 5}) == 12);
+    CHECK(Vector<int>{-3, -4}.dot(Vector<int>{5, -2}) == -7);
+}

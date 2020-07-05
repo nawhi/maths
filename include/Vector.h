@@ -36,6 +36,10 @@ namespace vectors {
             return map([&len](const I &i) { return i / len; });
         }
 
+        I dot(const Vector& other) const {
+            return std::inner_product(elements.begin(), elements.end(), other.elements.begin(), 0);
+        }
+
         bool operator==(const Vector &other) const {
             return elements == other.elements;
         }

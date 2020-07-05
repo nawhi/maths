@@ -16,10 +16,9 @@
 with `Vector` class
 - [x] Calculate length 
 - [x] Normalize (set length to 1)
-- [ ] Vector +/- scalar
 - [x] Vector +/- Vector
-- [ ] Vector * scalar (check 1/x too)
-- [ ] Dot product (`.dot()`)
+- [x] Vector * scalar (check 1/x too)
+- [x] Dot product (`.dot()`)
 - [ ] Cross product (`.cross()`)
 - [ ] Change basis
 - [ ] Gram-Schmidt process - make a basis set orthonormal
