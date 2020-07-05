@@ -67,14 +67,6 @@ namespace vectors {
 
         explicit Vector(std::vector<I> elems) : elements(elems), dimension(elems.size()) {}
 
-        void check_dims_match(const Vector &other) const {
-            I our_dim = dimension;
-            I their_dim = other.dimension;
-            if (their_dim != our_dim) {
-                throw dimension_mismatch();
-            }
-        }
-
         Vector map(std::function<I(I)> op) const {
             std::vector<I> result(dimension);
             std::transform(elements.begin(), elements.end(), result.begin(), op);
@@ -82,7 +74,10 @@ namespace vectors {
         }
 
         Vector combine(Vector other, std::function<I(I, I)> binary_op) const {
-            check_dims_match(other);
+            if (other.dimension != dimension) {
+                throw dimension_mismatch();
+            }
+
             std::vector<I> result(other.dimension);
             std::transform(elements.begin(), elements.end(), other.elements.begin(), result.begin(), binary_op);
             return Vector(result);
