@@ -1,24 +1,26 @@
 #include <catch.hpp>
-#include "vectors.h"
+#include "Vector.h"
 
-using linalg::vectors::norm;
-using linalg::vectors::len;
-
-TEST_CASE("Length of a vector", "[len]") {
-    CHECK(len<int>({0}) == 0);
-    CHECK(len<int>({1}) == 1);
-    CHECK(len<int>({2}) == 2);
-    CHECK(len<int>({0, 1}) == 1);
-    CHECK(len<int>({3, 4}) == 5);
-    CHECK(len<int>({2, 3, 6}) == 7);
-
-    CHECK(len<double>({12., 16., 21.}) == 29.);
+TEST_CASE("Vector equality", "[vector]") {
+    CHECK(Vector<int>({1}) == Vector<int>({1}));
+    CHECK(Vector<int>({2}) != Vector<int>({1}));
 }
 
-TEST_CASE("Normalizing a vector sets it to length 1", "[norm]") {
-    CHECK(norm<int>({1}) == std::vector<int>{1});
-    CHECK(norm<int>({2}) == std::vector<int>{1});
-    CHECK(norm<int>({1, 1}) == std::vector<int>{1, 1});
-    CHECK(norm<int>({2, 2}) == std::vector<int>{1, 1});
-    CHECK(norm<double>({3., 4.}) == std::vector<double>{0.6, 0.8});
+TEST_CASE("Length of a vector", "[vector]") {
+    CHECK(Vector<int>({0}).len() == 0);
+    CHECK(Vector<int>({1}).len() == 1);
+    CHECK(Vector<int>({2}).len() == 2);
+    CHECK(Vector<int>({0, 1}).len() == 1);
+    CHECK(Vector<int>({3, 4}).len() == 5);
+    CHECK(Vector<int>({2, 3, 6}).len() == 7);
+
+    CHECK(Vector<double>({12., 16., 21.}).len() == 29.);
+}
+
+TEST_CASE("Normalizing a vector sets it to length 1", "[vector]") {
+    CHECK(Vector<int>({1}).norm() == Vector<int>{1});
+    CHECK(Vector<int>({2}).norm() == Vector<int>{1});
+    CHECK(Vector<int>({1, 1}).norm() == Vector<int>{1, 1});
+    CHECK(Vector<int>({2, 2}).norm() == Vector<int>{1, 1});
+    CHECK(Vector<double>({3., 4.}).norm() == Vector<double>{0.6, 0.8});
 }
