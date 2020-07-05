@@ -52,21 +52,12 @@ TEST_CASE("Fraction equality", "[fraction]") {
     }
 }
 
-template<typename I>
-void test_string_repr(Fraction<I> r, const std::string &expected) {
-    std::stringstream ss;
-    ss << r;
-    SECTION(expected) {
-        CHECK(ss.str() == expected);
-    }
-}
-
 TEST_CASE("Fraction stream overload", "[fraction]") {
-    test_string_repr<int>(Fraction<int>(1, 2), "1/2");
-    test_string_repr<int>(Fraction<int>(2, 4), "1/2");
-    test_string_repr<int>(Fraction<int>(1), "1");
-    test_string_repr<int>(Fraction<int>(4, 2), "2");
-    test_string_repr<long>(Fraction<long>(3000000000L), "3000000000");
+    CHECK((std::stringstream() << Fraction<int>(1, 2)).str() == "1/2");
+    CHECK((std::stringstream() << Fraction<int>(2, 4)).str() == "1/2");
+    CHECK((std::stringstream() << Fraction<int>(1)).str() == "1");
+    CHECK((std::stringstream() << Fraction<int>(4, 2)).str() == "2");
+    CHECK((std::stringstream() << Fraction<long>(3000000000L)).str() == "3000000000");
 }
 
 TEST_CASE("Fraction multiplication", "[fraction]") {

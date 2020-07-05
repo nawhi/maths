@@ -24,6 +24,9 @@ namespace fractions {
     class division_by_zero : std::exception {
     };
 
+    class bad_init : std::exception {
+    };
+
     template<typename I>
     class Fraction {
     public:
@@ -113,7 +116,7 @@ namespace fractions {
             return num > i * denom;
         }
 
-        friend bool operator>(const I& lhs, const Fraction& rhs) {
+        friend bool operator>(const I &lhs, const Fraction &rhs) {
             return !(lhs == rhs || rhs > lhs);
         }
 
@@ -125,7 +128,7 @@ namespace fractions {
             return *this == i || *this > i;
         }
 
-        friend bool operator>=(const I& lhs, const Fraction& rhs) {
+        friend bool operator>=(const I &lhs, const Fraction &rhs) {
             return !(rhs > lhs);
         }
 
@@ -137,7 +140,7 @@ namespace fractions {
             return num < i * denom;
         }
 
-        friend bool operator<(const I& lhs, const Fraction& rhs) {
+        friend bool operator<(const I &lhs, const Fraction &rhs) {
             return rhs > lhs;
         }
 
@@ -149,7 +152,7 @@ namespace fractions {
             return *this == i || i > *this;
         }
 
-        friend bool operator<=(const I& lhs, const Fraction& rhs) {
+        friend bool operator<=(const I &lhs, const Fraction &rhs) {
             return !(lhs > rhs);
         }
 
@@ -164,6 +167,7 @@ namespace fractions {
 
         I num;
         I denom;
+
         Fraction times(const I &other) const {
             return Fraction(num * other, denom);
         }

@@ -14,15 +14,16 @@
 
 ## Vectors
 with `Vector` class
-- [ ] Calculate length 
-- [ ] Normalize (set length to 1)
+- [x] Calculate length 
+- [x] Normalize (set length to 1)
 - [ ] Vector +/- scalar
 - [ ] Vector +/- Vector
 - [ ] Vector * scalar (inc 1/x)
 - [ ] Dot product (`.dot()`)
 - [ ] Cross product (`.cross()`)
 - [ ] Change basis
-- [ ] Gram-Schmidt process - make a basis set orthonormal  
+- [ ] Gram-Schmidt process - make a basis set orthonormal
+- [ ] can we make passing `{}` to the ctor a compile error?  
 
 ## Matrices
 with `Matrix` class
