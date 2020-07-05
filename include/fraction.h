@@ -5,6 +5,22 @@
 
 namespace fractions {
 
+    template<typename I>
+    I gcd(I a, I b) {
+        if (b == 0) return a;
+        return gcd(b, a % b);
+    }
+
+    template <typename I>
+    I abs(I i) {
+        return i < 0 ? -i : i;
+    }
+
+    template <typename I>
+    I lcm(I a, I b) {
+        return (abs(a) / gcd(a, b)) * b;
+    }
+
     class bad_fraction : std::exception {
     public:
         explicit bad_fraction(std::string &&msg) : message(msg) {}
@@ -14,12 +30,6 @@ namespace fractions {
     private:
         const std::string message;
     };
-
-    template<typename I>
-    I gcd(I a, I b) {
-        if (b == 0) return a;
-        return gcd(b, a % b);
-    }
 
     template<typename I>
     class Fraction {
