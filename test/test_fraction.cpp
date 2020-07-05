@@ -132,7 +132,24 @@ TEST_CASE("Fraction subtraction", "[fraction]") {
     }
 }
 
+TEST_CASE("Fraction comparison", "[fraction]") {
+    CHECK(Fraction<int>(2) > Fraction<int>(1));
+    CHECK(Fraction<int>(4, 3) > Fraction<int>(5, 4));
+    CHECK(Fraction<int>(2) >= Fraction<int>(2));
+    CHECK(Fraction<int>(2, 3) >= Fraction<int>(1, 3));
+
+    CHECK(Fraction<int>(2) > 1);
+    CHECK(Fraction<int>(2) >= 2);
+    CHECK(Fraction<int>(2) >= 1);
+//    CHECK(2 > Fraction<int>(1));
+}
+
 
 TEST_CASE("Zero fractions", "[fraction]") {
-    CHECK_THROWS_AS(Fraction<int>(1, 0), fractions::bad_fraction);
+    CHECK_THROWS_AS(Fraction<int>(1, 0), fractions::division_by_zero);
+    const Fraction<int> &zero = Fraction<int>(0);
+    CHECK(zero == 0);
+    CHECK(zero / 1 == 0);
+    CHECK(zero * zero == 0);
+    CHECK_THROWS_AS(zero / zero, fractions::division_by_zero);
 }

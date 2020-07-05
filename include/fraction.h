@@ -21,14 +21,7 @@ namespace fractions {
         return (abs(a) / greatest_common_divisor(a, b)) * b;
     }
 
-    class bad_fraction : std::exception {
-    public:
-        explicit bad_fraction(std::string &&msg) : message(msg) {}
-
-        [[nodiscard]] const char *what() const noexcept override { return message.c_str(); }
-
-    private:
-        const std::string message;
+    class division_by_zero : std::exception {
     };
 
     template<typename I>
@@ -36,7 +29,7 @@ namespace fractions {
     public:
         explicit Fraction(const I numerator, const I denominator = 1) {
             if (denominator == 0) {
-                throw bad_fraction("denominator cannot be zero");
+                throw division_by_zero();
             }
             I gcd = greatest_common_divisor(numerator, denominator);
             num = numerator / gcd;
@@ -103,12 +96,28 @@ namespace fractions {
             return minus(other);
         }
 
-        Fraction operator-(const I& other) const {
-            return minus(other);
+        Fraction operator-(const I &i) const {
+            return minus(i);
         }
 
         Fraction operator-() {
             return Fraction(-num, denom);
+        }
+
+        bool operator>(const Fraction &other) const {
+            return gt(other);
+        }
+
+        bool operator>(const I &i) const {
+            return num > i * denom;
+        }
+
+        bool operator>=(const Fraction &other) const {
+            return *this == other || *this > other;
+        }
+
+        bool operator>=(const I &i) const {
+            return *this == i || *this > i;
         }
 
         friend std::ostream &operator<<(std::ostream &os, Fraction<I> r) {
@@ -119,9 +128,9 @@ namespace fractions {
         }
 
     private:
+
         I num;
         I denom;
-
         Fraction times(const I &other) const {
             return Fraction(num * other, denom);
         }
@@ -156,6 +165,16 @@ namespace fractions {
 
         Fraction minus(const I &other) const {
             return Fraction(num - other * denom, denom);
+        }
+
+        bool gt(const Fraction &other) const {
+            const I lcm = lowest_common_multiple(denom, other.denom);
+            return num * (lcm / denom) > other.num * (lcm / other.denom);
+        }
+
+        bool lt(const Fraction &other) const {
+            const I lcm = lowest_common_multiple(denom, other.denom);
+            return num * (lcm / denom) < other.num * (lcm / other.denom);
         }
     };
 
