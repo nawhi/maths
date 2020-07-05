@@ -1,5 +1,5 @@
-#ifndef MATRIX_RATIONALS_H
-#define MATRIX_RATIONALS_H
+#ifndef MATHS_FRACTION_H
+#define MATHS_FRACTION_H
 
 #include <iostream>
 
@@ -112,4 +112,4 @@ namespace fractions {
     };
 
 }
-#endif //MATRIX_RATIONALS_H
+#endif //MATHS_FRACTION_H
