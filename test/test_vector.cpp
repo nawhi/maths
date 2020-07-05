@@ -50,7 +50,7 @@ TEST_CASE("Vector-Vector addition", "[vector]") {
     CHECK_THROWS_AS((Vector<int>{9} + Vector<int>{1, 1}), vectors::dimension_mismatch);
 
     CHECK(Vector<int>{1} + Vector<int>{1} == Vector<int>{2});
-    CHECK((Vector<int>{4, 3, 5} + Vector<int>{1, 2, 3}) == Vector<int>{5, 5, 8});
+    CHECK((Vector<int>{7, 8, 9} + Vector<int>{1, 2, 1}) == Vector<int>{8, 10, 10});
 }
 
 TEST_CASE("Vector-Vector subtraction", "[vector]") {
@@ -58,4 +58,8 @@ TEST_CASE("Vector-Vector subtraction", "[vector]") {
 
     CHECK(Vector<int>{1} - Vector<int>{1} == Vector<int>{0});
     CHECK(((Vector<int>{1, 2, 3}) - (Vector<int>{4, 3, 2})) == Vector<int>{-3, -1, 1});
+}
+
+TEST_CASE("Vector * Scalar", "[vector]") {
+    CHECK(Vector<int>{1, 2, 3} * 2 == Vector<int>{2, 4, 6});
 }

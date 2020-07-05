@@ -48,7 +48,7 @@ namespace vectors {
 
         Vector operator+(const Vector& other) const {
             check_dims_match(other);
-            std::vector<I> result(other.len());
+            std::vector<I> result(other.dimension);
             std::transform(elements.begin(), elements.end(), other.elements.begin(), result.begin(),
                            [](const I &e, const I &o) { return e + o; });
             return Vector(result);
@@ -60,6 +60,10 @@ namespace vectors {
             std::transform(elements.begin(), elements.end(), other.elements.begin(), result.begin(),
                            [](const I &e, const I &o) { return e - o; });
             return Vector(result);
+        }
+
+        Vector operator*(I other) const {
+
         }
 
         friend std::ostream &operator<<(std::ostream &os, const Vector &v) {
