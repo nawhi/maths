@@ -11,6 +11,13 @@ namespace vectors {
     };
 
     class dimension_mismatch : std::exception {
+    public:
+        explicit dimension_mismatch(const std::string &&message) : msg(message) {}
+
+        [[nodiscard]] const char *what() const noexcept override { return msg.c_str(); }
+
+    private:
+        const std::string &msg;
     };
 
     template<typename I>
@@ -36,8 +43,16 @@ namespace vectors {
             return map([&len](const I &i) { return i / len; });
         }
 
-        I dot(const Vector& other) const {
+        I dot(const Vector &other) const {
             return std::inner_product(elements.begin(), elements.end(), other.elements.begin(), 0);
+        }
+
+        Vector cross(const Vector& other) const {
+            if (dimension != 3 || other.dimension != 3) {
+                throw dimension_mismatch("cannot take cross product of non-3d vector");
+            }
+
+            throw std::runtime_error("TODO");
         }
 
         bool operator==(const Vector &other) const {
@@ -79,7 +94,9 @@ namespace vectors {
 
         Vector combine(Vector other, std::function<I(I, I)> binary_op) const {
             if (other.dimension != dimension) {
-                throw dimension_mismatch();
+                std::ostringstream os;
+                os << "Dimensions differ: " << dimension << " and " << other.dimension;
+                throw dimension_mismatch(os.str());
             }
 
             std::vector<I> result(other.dimension);

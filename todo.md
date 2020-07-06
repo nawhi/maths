@@ -19,10 +19,11 @@ with `Vector` class
 - [x] Vector +/- Vector
 - [x] Vector * scalar (check 1/x too)
 - [x] Dot product (`.dot()`)
+- [ ] Vector projection (`.project()`)
+- [ ] Scalar projection (`.scalar_project()`)
 - [ ] Cross product (`.cross()`)
 - [ ] Change basis
 - [ ] Gram-Schmidt process - make a basis set orthonormal
-- [ ] can we make passing `{}` to the ctor a compile error?  
 
 ## Matrices
 with `Matrix` class

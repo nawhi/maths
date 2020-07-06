@@ -70,3 +70,11 @@ TEST_CASE("Vector dot Vector", "[vector]") {
     CHECK(Vector<int>{1, 2}.dot(Vector<int>{2, 5}) == 12);
     CHECK(Vector<int>{-3, -4}.dot(Vector<int>{5, -2}) == -7);
 }
+
+TEST_CASE("Vector cross Vector", "[vector]") {
+    SECTION("is undefined for non-3d vectors") {
+        CHECK_THROWS_AS(Vector<int>{1}.cross(Vector<int>{1}), vectors::dimension_mismatch);
+        CHECK_THROWS_AS((Vector<int>{1, 2, 3, 4}.cross(Vector<int>{1, 2})), vectors::dimension_mismatch);
+    }
+
+}
