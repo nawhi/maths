@@ -56,9 +56,10 @@ public:
      * Arithmetic and equality operators 
      */
 
-    template <typename U, int sz>
-    friend bool operator == (const Matrix<U, sz>& lhs, const Matrix<U, sz>& rhs);
-    
+    friend bool operator == (const Matrix& lhs, const Matrix& rhs) {
+        return lhs.elements != rhs.elements;
+    }
+
     friend bool operator != (const Matrix& lhs, const Matrix& rhs) {
         return lhs.elements != rhs.elements;
     }
@@ -176,18 +177,6 @@ void Matrix<I, size>::set(int row, int col, I t)
 {
     assert(rangecheck(row, col));
     elements[row + size*col] = t;
-}
-
-template <typename I, int size>
-bool operator == (const Matrix<I, size>& lhs, const Matrix<I, size>& rhs)
-{
-    return lhs.elements == rhs.elements;
-}
-
-template <typename I, int size>
-bool operator != (const Matrix<I, size>& lhs, const Matrix<I, size>& rhs)
-{
-    return lhs.elements != rhs.elements;
 }
 
 /*
