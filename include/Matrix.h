@@ -33,7 +33,7 @@ public:
      * Constructor designed to take matrices in 
      * written form in initialiser lists in code.
      */
-    Matrix<I, size>(std::initializer_list<I> elems);
+    Matrix<I, size>(std::initializer_list<I>&& elems);
 
     /**
      * Constructor designed to take matrices in 
@@ -59,8 +59,9 @@ public:
     template <typename U, int sz>
     friend bool operator == (const Matrix<U, sz>& lhs, const Matrix<U, sz>& rhs);
     
-    template <typename U, int sz>
-    friend bool operator != (const Matrix<U, sz>& lhs, const Matrix<U, sz>& rhs);
+    friend bool operator != (const Matrix& lhs, const Matrix& rhs) {
+        return lhs.elements != rhs.elements;
+    }
 
     friend Matrix operator * (const Matrix& lhs, const Matrix& rhs) {
         Matrix<I, size> ret;
@@ -113,7 +114,7 @@ private:
  * 12 13 14 15 
  */
 template<typename I, int size>
-Matrix<I, size>::Matrix(std::initializer_list<I> elems)
+Matrix<I, size>::Matrix(std::initializer_list<I>&& elems)
 {
     assert(elems.size() == elements.size());
 
