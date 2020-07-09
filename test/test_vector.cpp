@@ -69,6 +69,7 @@ TEST_CASE("Vector dot Vector", "[vector]") {
     CHECK(Vector<int>{1}.dot(Vector<int>{1}) == 1);
     CHECK(Vector<int>{1, 2}.dot(Vector<int>{2, 5}) == 12);
     CHECK(Vector<int>{-3, -4}.dot(Vector<int>{5, -2}) == -7);
+
 }
 
 TEST_CASE("Vector cross Vector", "[vector]") {
@@ -76,5 +77,4 @@ TEST_CASE("Vector cross Vector", "[vector]") {
         CHECK_THROWS_AS(Vector<int>{1}.cross(Vector<int>{1}), vectors::dimension_mismatch);
         CHECK_THROWS_AS((Vector<int>{1, 2, 3, 4}.cross(Vector<int>{1, 2})), vectors::dimension_mismatch);
     }
-
 }
