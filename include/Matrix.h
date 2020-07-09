@@ -15,13 +15,8 @@
 /*
  * A square size * size matrix with elements of type T.
  * T must be a numeric type which is default-constructed
- * to a value of zero (so that the correct identity
- * matrix can be formed).
- * It should also support:
- *    the equality operators == !=
- *    the arithmetic operators + - * /
- *    the unary operators + -
- *    the stream operator <<
+ * to a value of zero and it should support arithmetic and
+ * equality operations with integer rvalues.
  */
 template <typename I, int size>
 class Matrix {
@@ -67,8 +62,20 @@ public:
     template <typename U, int sz>
     friend bool operator != (const Matrix<U, sz>& lhs, const Matrix<U, sz>& rhs);
 
-    template <typename U, int sz>
-    friend Matrix<U, sz> operator * (const Matrix<U, sz>& lhs, const Matrix<U, sz>& rhs);
+    friend Matrix operator * (const Matrix& lhs, const Matrix& rhs) {
+        Matrix<I, size> ret;
+        for (int i = 0; i < size; i++)
+        {
+            for (int j = 0; j < size; j++)
+            {
+                I sum = 0;
+                for (int k = 0; k < size; k++)
+                    sum += lhs(i, k) * rhs(k, j);
+                ret.set(i, j, sum);
+            }
+        }
+        return ret;
+    }
 
     /**
      * Method for converting matrix to a string. (Useful for debuggers)
@@ -180,23 +187,6 @@ template <typename I, int size>
 bool operator != (const Matrix<I, size>& lhs, const Matrix<I, size>& rhs)
 {
     return lhs.elements != rhs.elements;
-}
-
-template <typename I, int size>
-Matrix<I, size> operator * (const Matrix<I, size>& lhs, const Matrix<I, size>& rhs)
-{
-    Matrix<I, size> ret;
-    for (int i = 0; i < size; i++)
-    {
-        for (int j = 0; j < size; j++)
-        {
-            I sum = 0;
-            for (int k = 0; k < size; k++)
-                sum += lhs(i, k) * rhs(k, j);
-            ret.set(i, j, sum);
-        }
-    }
-    return ret;
 }
 
 /*
