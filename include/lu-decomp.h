@@ -1,9 +1,9 @@
-#include "Matrix.h"
+#include "MatrixOld.h"
 
 namespace matrices::old {
 
     template<typename T, int size>
-    Matrix<T, size> add_row_multiple(const Matrix<T, size>& mx, int r_from, int r_to, T factor)
+    MatrixOld<T, size> add_row_multiple(const MatrixOld<T, size>& mx, int r_from, int r_to, T factor)
     {
         auto res = mx;
         for (int col=0; col<size; col++)
@@ -18,11 +18,11 @@ namespace matrices::old {
 
 
     template <typename T, int size>
-    std::pair<Matrix<T, size>, Matrix<T, size>> lu_decomp(Matrix<T, size> mx)
+    std::pair<MatrixOld < T, size>, MatrixOld<T, size>> lu_decomp(MatrixOld<T, size> mx)
     {
         // Begin with I * mx
-        Matrix<T, size> l = Matrix<T, size>::identity();
-        Matrix<T, size> u = mx;
+        MatrixOld<T, size> l = MatrixOld < T, size>::identity();
+        MatrixOld<T, size> u = mx;
 
         for (int c = 0; c < size-1 /* stop before final row */; c++)
         {

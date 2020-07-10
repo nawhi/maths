@@ -1,8 +1,8 @@
 #include <iostream>
 #include <fstream>
-#include <Matrix.h>
+#include <MatrixOld.h>
 
-using matrices::old::Matrix;
+using matrices::old::MatrixOld;
 
 /**
  * Read a comma-separated line of integers into a vector.
@@ -32,7 +32,7 @@ std::vector<int> parse_line(const std::string& line)
  * @return a 4x4 Matrix of ints with the matrix described
  *         in the csv file
  */
-Matrix<int, 4> read_csv(const std::string& filename)
+MatrixOld<int, 4> read_csv(const std::string& filename)
 {
     std::ifstream fs(filename);
     if (!fs.good())
@@ -48,7 +48,7 @@ Matrix<int, 4> read_csv(const std::string& filename)
             std::cout << j << ",";
         std::cout << std::endl;
     }
-    return Matrix<int, 4>(v);
+    return MatrixOld<int, 4>(v);
 }
 
 int main(int argc, char* argv[])
