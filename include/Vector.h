@@ -77,7 +77,7 @@ namespace vectors {
 
         friend std::ostream &operator<<(std::ostream &os, const Vector &v) {
             os << "[" << v.elements[0];
-            std::for_each(v.elements.begin() + 1, v.elements.end(), [&os](const auto &e) { os << ", " << e; });
+            std::for_each(v.elements.begin() + 1, v.elements.end(), [&os](const auto &e) { os << " " << e; });
             os << "]";
             return os;
         }

@@ -36,14 +36,14 @@ TEST_CASE("Normalizing a vector (set to length 1)", "[vector]") {
 
 TEST_CASE("Vector stream overload", "[vector]") {
     CHECK((std::stringstream() << Vector<int>{1}).str() == "[1]");
-    CHECK((std::stringstream() << Vector<int>{1, 2}).str() == "[1, 2]");
+    CHECK((std::stringstream() << Vector<int>{1, 2}).str() == "[1 2]");
 
     const auto &vector = Vector<Fraction<int>>{Fraction<int>{1, 2},
                                                Fraction<int>{2, 3},
                                                Fraction<int>{3, 4},
                                                Fraction<int>{4, 5},
                                                Fraction<int>{5, 6}};
-    CHECK((std::stringstream() << vector).str() == "[1/2, 2/3, 3/4, 4/5, 5/6]");
+    CHECK((std::stringstream() << vector).str() == "[1/2 2/3 3/4 4/5 5/6]");
 }
 
 TEST_CASE("Vector-Vector addition", "[vector]") {
