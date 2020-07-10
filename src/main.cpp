@@ -2,6 +2,8 @@
 #include <fstream>
 #include <Matrix.h>
 
+using matrices::old::Matrix;
+
 /**
  * Read a comma-separated line of integers into a vector.
  * @param line the raw string to read

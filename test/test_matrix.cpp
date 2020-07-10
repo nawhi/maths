@@ -3,6 +3,7 @@
 #include <Matrix.h>
 #include <lu-decomp.h>
 
+using matrices::old::Matrix, matrices::old::lu_decomp;
 
 Matrix<int, 4> zero = {
     0, 0, 0, 0,
