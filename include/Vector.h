@@ -49,17 +49,17 @@ namespace vectors {
             return std::inner_product(elements.begin(), elements.end(), other.elements.begin(), 0);
         }
 
-        Vector cross(const Vector& other) const {
+        Vector cross(const Vector &other) const {
             if (dimension != 3 || other.dimension != 3) {
                 throw dimension_mismatch("cannot take cross product of non-3d vector");
             }
 
-            const auto& a = elements, b = other.elements;
+            const auto &u = elements, &v = other.elements;
 
             return Vector{
-                a[1]*b[2] - b[1]*a[2],
-                a[0]*b[2] - b[0]*a[2],
-                a[0]*b[1] - b[0]*a[1]
+                    u[1] * v[2] - u[2] * v[1],
+                    u[2] * v[0] - u[0] * v[2],
+                    u[0] * v[1] - u[1] * v[0]
             };
         }
 
