@@ -77,4 +77,11 @@ TEST_CASE("Vector cross Vector", "[vector]") {
         CHECK_THROWS_AS(Vector<int>{1}.cross(Vector<int>{1}), vectors::dimension_mismatch);
         CHECK_THROWS_AS((Vector<int>{1, 2, 3, 4}.cross(Vector<int>{1, 2})), vectors::dimension_mismatch);
     }
+
+    CHECK((Vector<int>{1, 0, 0}.cross(Vector<int>{0, 0, 1})) == Vector<int>{0, 1, 0});
+
+    // todo:
+    // negative
+    // non-integer
+    // other edge cases?
 }

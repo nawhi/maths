@@ -31,6 +31,8 @@ namespace vectors {
             }
         }
 
+        explicit Vector(std::vector<I> elems) : elements(elems), dimension(elems.size()) {}
+
         I length() const {
             return sqrt(std::reduce(
                     elements.begin(),
@@ -52,7 +54,13 @@ namespace vectors {
                 throw dimension_mismatch("cannot take cross product of non-3d vector");
             }
 
-            throw std::runtime_error("TODO");
+            const auto& a = elements, b = other.elements;
+
+            return Vector{
+                a[1]*b[2] - b[1]*a[2],
+                a[0]*b[2] - b[0]*a[2],
+                a[0]*b[1] - b[0]*a[1]
+            };
         }
 
         bool operator==(const Vector &other) const {
@@ -83,8 +91,6 @@ namespace vectors {
         }
 
     private:
-
-        explicit Vector(std::vector<I> elems) : elements(elems), dimension(elems.size()) {}
 
         Vector map(std::function<I(I)> op) const {
             std::vector<I> result(dimension);

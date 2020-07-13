@@ -20,6 +20,7 @@ with `Vector` class
 - [x] Vector * scalar (check 1/x too)
 - [x] Dot product (`.dot()`)
 - [ ] Cross product (`.cross()`) 3d only
+- [ ] Cross product in 7 dimensions
 - [ ] Vector projection (`.project()`)
 - [ ] Scalar projection (`.scalar_project()`)
 - [ ] Change basis
