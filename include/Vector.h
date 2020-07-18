@@ -36,7 +36,7 @@ namespace vectors {
         explicit Vector(std::vector<I> elems) : elements(elems), dimension(elems.size()) {}
 
         I length() const {
-            return sqrt(sum_elems_squared());
+            return sqrt(mapped_sum(square));
         }
 
         Vector norm() const {
@@ -63,10 +63,11 @@ namespace vectors {
         }
 
         Vector project(const Vector &onto) const {
-            const auto len_onto_squared = onto.reduce(0, [](const I &acc, const I &cur) { return acc + cur * cur; });
+            assert_dims_match(onto);
+            const auto onto_sum_squares = onto.mapped_sum(square);
             const auto d = dot(onto);
             return onto.map([&](const I &i) {
-                return (i * d) / len_onto_squared;
+                return (i * d) / onto_sum_squares;
             });
         }
 
@@ -102,6 +103,9 @@ namespace vectors {
         }
 
     private:
+        static I square(const I &i) {
+            return i * i;
+        }
 
         Vector map(std::function<I(I)> op) const {
             std::vector<I> result(dimension);
@@ -114,24 +118,24 @@ namespace vectors {
         }
 
         Vector combine(Vector other, std::function<I(I, I)> binary_op) const {
-            if (other.dimension != dimension) {
-                std::ostringstream os;
-                os << "Dimensions differ: " << dimension << " and " << other.dimension;
-                throw dimension_mismatch(os.str());
-            }
+            assert_dims_match(other);
 
             std::vector<I> result(other.dimension);
             std::transform(elements.begin(), elements.end(), other.elements.begin(), result.begin(), binary_op);
             return Vector(result);
         }
 
-        I sum_elems_squared() const {
-            return reduce(0, [](const I &acc, const I &i) { return acc + i * i; });
+        void assert_dims_match(const Vector &other) const {
+            if (other.dimension != dimension) {
+                std::ostringstream os;
+                os << "Dimensions differ: " << dimension << " and " << other.dimension;
+                throw dimension_mismatch(os.str());
+            }
         }
 
-        I mapped_sum(std::function<I(I)>& op) const {
-            return std::reduce(elements.begin(), elements.end(),
-                    [&op](const I& acc, const I& i) { return acc + op(i); } );
+        I mapped_sum(std::function<I(I)> mapper) const {
+            return std::reduce(elements.begin(), elements.end(), I(),
+                               [&mapper](const I &acc, const I &i) { return acc + mapper(i); });
         }
 
         const std::vector<I> elements;

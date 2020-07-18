@@ -88,9 +88,10 @@ TEST_CASE("Vector cross Vector", "[vector]") {
 }
 
 TEST_CASE("Vector project Vector", "[vector]") {
-//    CHECK_THROWS_AS((Vector<int>{1, 2, 3, 4}.project(Vector<int>{1, 2})), vectors::dimension_mismatch);
+    CHECK_THROWS_AS((Vector<int>{1, 2, 3, 4}.project(Vector<int>{1, 2})), vectors::dimension_mismatch);
 
     CHECK(Vector<int>{1, 1}.project({1, 1}) == Vector<int>{1, 1});
     CHECK(Vector<double>{2, 3, 4, 5}.project({4, 6, 8, 10}) == Vector<double>{2, 3, 4, 5});
     CHECK(Vector<int>{17, -7}.project({12, 5}) == Vector<int>{12, 5});
+    CHECK(Vector<double>{12, 5}.project({17, -7}) == Vector<double>{8.5, -3.5});
 }
