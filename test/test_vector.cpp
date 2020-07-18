@@ -62,7 +62,7 @@ TEST_CASE("Vector - Vector", "[vector]") {
 
 TEST_CASE("Vector * Scalar", "[vector]") {
     CHECK(Vector<int>{1, 2, 3} * 2 == Vector<int>{2, 4, 6});
-    CHECK(Vector<double>{50., 50.} * (1./2) == Vector<double>{25., 25.} );
+    CHECK(Vector<double>{50., 50.} * (1. / 2) == Vector<double>{25., 25.});
 }
 
 TEST_CASE("Vector / Scalar", "[vector]") {
@@ -85,4 +85,12 @@ TEST_CASE("Vector cross Vector", "[vector]") {
     CHECK(Vector<int>{1, 1, 1}.cross(Vector<int>{1, 1, 1}) == Vector<int>{0, 0, 0});
     CHECK(Vector<int>{1, 0, 0}.cross(Vector<int>{0, 0, 1}) == Vector<int>{0, -1, 0});
     CHECK(Vector<int>{3, 4, 5}.cross(Vector<int>{5, 4, 3}) == Vector<int>{-8, 16, -8});
+}
+
+TEST_CASE("Vector project Vector", "[vector]") {
+//    CHECK_THROWS_AS((Vector<int>{1, 2, 3, 4}.project(Vector<int>{1, 2})), vectors::dimension_mismatch);
+
+    CHECK(Vector<int>{1, 1}.project({1, 1}) == Vector<int>{1, 1});
+    CHECK(Vector<double>{2, 3, 4, 5}.project({4, 6, 8, 10}) == Vector<double>{2, 3, 4, 5});
+//    CHECK(Vector<int>{2, 6, 3}.project({6, 3, 2}) == Vector<int>{6, 3, 2});
 }

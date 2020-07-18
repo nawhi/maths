@@ -4,6 +4,7 @@
 #include <vector>
 #include <sstream>
 #include <functional>
+#include <iostream>
 
 namespace vectors {
 
@@ -61,6 +62,12 @@ namespace vectors {
                     u[2] * v[0] - u[0] * v[2],
                     u[0] * v[1] - u[1] * v[0]
             };
+        }
+
+        Vector project(const Vector &onto) const {
+            return combine(onto, [](const I &a, const I &b) {
+                return b * (a / b);
+            });
         }
 
         bool operator==(const Vector &other) const {
