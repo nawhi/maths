@@ -71,6 +71,10 @@ namespace vectors {
             });
         }
 
+        double angle_to(const Vector& other) const {
+            assert_dims_match(other);
+        }
+
         bool operator==(const Vector &other) const {
             return elements == other.elements;
         }

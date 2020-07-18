@@ -95,3 +95,7 @@ TEST_CASE("Vector project Vector", "[vector]") {
     CHECK(Vector<int>{17, -7}.project({12, 5}) == Vector<int>{12, 5});
     CHECK(Vector<double>{12, 5}.project({17, -7}) == Vector<double>{8.5, -3.5});
 }
+
+TEST_CASE("Vector angle_to Vector is clockwise angle from v1 to v2", "[vector]") {
+    CHECK_THROWS_AS((Vector<int>{1, 2, 3, 4}.angle_to(Vector<int>{1, 2})), vectors::dimension_mismatch);
+}

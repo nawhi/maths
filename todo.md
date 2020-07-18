@@ -20,8 +20,8 @@ with `Vector` class
 - [x] Vector * scalar (check 1/x too)
 - [x] Dot product (`.dot(Vector)`)
 - [x] Cross product (`.cross(Vector)`) 3d only
-- [ ] Vector projection (`.project(Vector)`)
-- [ ] Angle between two vectors (`)
+- [x] Vector projection (`.project(Vector)`)
+- [ ] Angle between two vectors
 - [ ] Change basis (`.to_basis(Matrix)`)
 - [ ] Gram-Schmidt process - make a basis set orthonormal
 
@@ -64,3 +64,4 @@ with `Matrix` class (all square)
 - [ ] Can the size parameter be templated?
 - [ ] Cross products in other dimensions
 - [ ] Support non-square matrices - different class, or generalisation?
+- [ ] optimisations? what's really slow? 
