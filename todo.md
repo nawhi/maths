@@ -18,15 +18,19 @@ with `Vector` class
 - [x] Normalize (set length to 1)
 - [x] Vector +/- Vector
 - [x] Vector * scalar (check 1/x too)
-- [x] Dot product (`.dot()`)
-- [x] Cross product (`.cross()`) 3d only
-- [ ] Vector projection (`.project()`)
-- [ ] Scalar projection (`.scalar_project()`)
-- [ ] Change basis
+- [x] Dot product (`.dot(Vector)`)
+- [x] Cross product (`.cross(Vector)`) 3d only
+- [ ] Vector projection (`.project(Vector)`)
+- [ ] Angle between two vectors (`)
+- [ ] Change basis (`.to_basis(Matrix)`)
 - [ ] Gram-Schmidt process - make a basis set orthonormal
 
+Snags:
+- [ ] dimension should be int, not I
+- [ ] implicit conversion to remove 
+
 ## Matrices
-with `Matrix` class
+with `Matrix` class (all square)
 - [ ] Compute matrix plus/minus:
   - [ ] scalar
   - [ ] vector
@@ -55,3 +59,8 @@ with `Matrix` class
 ## Systems
 - [ ] Solve a system using Cramer’s rule
 - [ ] Solve a system using Gaussian elimination
+
+## Other
+- [ ] Can the size parameter be templated?
+- [ ] Cross products in other dimensions
+- [ ] Support non-square matrices - different class, or generalisation?
