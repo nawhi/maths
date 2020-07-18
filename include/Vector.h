@@ -144,7 +144,7 @@ namespace vectors {
         }
 
         const std::vector<I> elements;
-        const I dimension;
+        const size_t dimension;
     };
 
 }
