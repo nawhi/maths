@@ -56,7 +56,7 @@ namespace vectors {
 
             const auto &u = elements, &v = other.elements;
 
-            return Vector{
+            return {
                     u[1] * v[2] - u[2] * v[1],
                     u[2] * v[0] - u[0] * v[2],
                     u[0] * v[1] - u[1] * v[0]
@@ -80,7 +80,11 @@ namespace vectors {
         }
 
         Vector operator*(const I i) const {
-            return map([&i](const I &e) { return e * i; });
+            return map([&i](const I &elem) { return elem * i; });
+        }
+
+        Vector operator/(const I i) const {
+            return map([&i](const I &elem) { return elem / i; });
         }
 
         friend std::ostream &operator<<(std::ostream &os, const Vector &v) {

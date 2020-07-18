@@ -46,14 +46,14 @@ TEST_CASE("Vector stream overload", "[vector]") {
     CHECK((std::stringstream() << vector).str() == "[1/2 2/3 3/4 4/5 5/6]");
 }
 
-TEST_CASE("Vector-Vector addition", "[vector]") {
+TEST_CASE("Vector + Vector", "[vector]") {
     CHECK_THROWS_AS((Vector<int>{9} + Vector<int>{1, 1}), vectors::dimension_mismatch);
 
     CHECK(Vector<int>{1} + Vector<int>{1} == Vector<int>{2});
     CHECK((Vector<int>{7, 8, 9} + Vector<int>{1, 2, 1}) == Vector<int>{8, 10, 10});
 }
 
-TEST_CASE("Vector-Vector subtraction", "[vector]") {
+TEST_CASE("Vector - Vector", "[vector]") {
     CHECK_THROWS_AS((Vector<int>{9} - Vector<int>{1, 1}), vectors::dimension_mismatch);
 
     CHECK(Vector<int>{1} - Vector<int>{1} == Vector<int>{0});
@@ -63,6 +63,10 @@ TEST_CASE("Vector-Vector subtraction", "[vector]") {
 TEST_CASE("Vector * Scalar", "[vector]") {
     CHECK(Vector<int>{1, 2, 3} * 2 == Vector<int>{2, 4, 6});
     CHECK(Vector<double>{50., 50.} * (1./2) == Vector<double>{25., 25.} );
+}
+
+TEST_CASE("Vector / Scalar", "[vector]") {
+    CHECK(Vector<int>{2, 4, 6} / 2 == Vector<int>{1, 2, 3});
 }
 
 TEST_CASE("Vector dot Vector", "[vector]") {
