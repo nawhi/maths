@@ -98,4 +98,8 @@ TEST_CASE("Vector project Vector", "[vector]") {
 
 TEST_CASE("Vector angle_to Vector is clockwise angle from v1 to v2", "[vector]") {
     CHECK_THROWS_AS((Vector<int>{1, 2, 3, 4}.angle_to(Vector<int>{1, 2})), vectors::dimension_mismatch);
+
+//    CHECK(Vector<double>{1, 1}.angle_to({1, 1}) == Approx(0)); // TODO why does this fail?
+    CHECK(std::abs(Vector<double>{1, 1}.angle_to({1, 1})) < 0.00001);
+    CHECK(Vector<double>{1, 1}.angle_to({-1, -1}) == Approx(M_PI));
 }

@@ -21,9 +21,8 @@ with `Vector` class
 - [x] Dot product (`.dot(Vector)`)
 - [x] Cross product (`.cross(Vector)`) 3d only
 - [x] Vector projection (`.project(Vector)`)
-- [ ] Angle between two vectors
+- [x] Angle between two vectors
 - [ ] Change basis (`.to_basis(Matrix)`)
-- [ ] Gram-Schmidt process - make a basis set orthonormal
 
 Snags:
 - [ ] dimension should be int, not I
@@ -55,6 +54,7 @@ with `Matrix` class (all square)
   - [ ] using QR-decomposition
   - [ ] brute-force
 - [ ] Calculate null space
+- [ ] Make basis vectors orthonormal using Gram-Schmidt
   
 ## Systems
 - [ ] Solve a system using Cramer’s rule

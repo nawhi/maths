@@ -73,6 +73,7 @@ namespace vectors {
 
         double angle_to(const Vector& other) const {
             assert_dims_match(other);
+            return acos((double) dot(other) / (length() * other.length()));
         }
 
         bool operator==(const Vector &other) const {
