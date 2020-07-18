@@ -24,10 +24,6 @@ with `Vector` class
 - [x] Angle between two vectors
 - [ ] Change basis (`.to_basis(Matrix)`)
 
-Snags:
-- [ ] dimension should be int, not I
-- [ ] use I(), not 0, to construct a zero
-
 ## Matrices
 with `Matrix` class (all square)
 - [ ] Compute matrix plus/minus:
