@@ -92,5 +92,5 @@ TEST_CASE("Vector project Vector", "[vector]") {
 
     CHECK(Vector<int>{1, 1}.project({1, 1}) == Vector<int>{1, 1});
     CHECK(Vector<double>{2, 3, 4, 5}.project({4, 6, 8, 10}) == Vector<double>{2, 3, 4, 5});
-//    CHECK(Vector<int>{2, 6, 3}.project({6, 3, 2}) == Vector<int>{6, 3, 2});
+    CHECK(Vector<int>{17, -7}.project({12, 5}) == Vector<int>{12, 5});
 }

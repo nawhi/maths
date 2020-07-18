@@ -1,6 +1,7 @@
 #ifndef MATRIX_VECTOR_H
 #define MATRIX_VECTOR_H
 
+#include <cmath>
 #include <vector>
 #include <sstream>
 #include <functional>
@@ -35,10 +36,7 @@ namespace vectors {
         explicit Vector(std::vector<I> elems) : elements(elems), dimension(elems.size()) {}
 
         I length() const {
-            return sqrt(std::reduce(
-                    elements.begin(),
-                    elements.end(),
-                    0, [](const I &acc, const I &i) { return acc + i * i; }));
+            return sqrt(sum_elems_squared());
         }
 
         Vector norm() const {
@@ -65,8 +63,10 @@ namespace vectors {
         }
 
         Vector project(const Vector &onto) const {
-            return combine(onto, [](const I &a, const I &b) {
-                return b * (a / b);
+            const auto len_onto_squared = onto.reduce(0, [](const I &acc, const I &cur) { return acc + cur * cur; });
+            const auto d = dot(onto);
+            return onto.map([&](const I &i) {
+                return (i * d) / len_onto_squared;
             });
         }
 
@@ -109,6 +109,10 @@ namespace vectors {
             return Vector(result);
         }
 
+        I reduce(I init, std::function<I(I, I)> op) const {
+            return std::reduce(elements.begin(), elements.end(), init, op);
+        }
+
         Vector combine(Vector other, std::function<I(I, I)> binary_op) const {
             if (other.dimension != dimension) {
                 std::ostringstream os;
@@ -119,6 +123,15 @@ namespace vectors {
             std::vector<I> result(other.dimension);
             std::transform(elements.begin(), elements.end(), other.elements.begin(), result.begin(), binary_op);
             return Vector(result);
+        }
+
+        I sum_elems_squared() const {
+            return reduce(0, [](const I &acc, const I &i) { return acc + i * i; });
+        }
+
+        I mapped_sum(std::function<I(I)>& op) const {
+            return std::reduce(elements.begin(), elements.end(),
+                    [&op](const I& acc, const I& i) { return acc + op(i); } );
         }
 
         const std::vector<I> elements;

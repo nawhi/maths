@@ -27,7 +27,7 @@ with `Vector` class
 
 Snags:
 - [ ] dimension should be int, not I
-- [ ] implicit conversion to remove 
+- [ ] use I(), not 0, to construct a zero
 
 ## Matrices
 with `Matrix` class (all square)
