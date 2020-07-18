@@ -70,21 +70,21 @@ TEST_CASE("Vector / Scalar", "[vector]") {
 }
 
 TEST_CASE("Vector dot Vector", "[vector]") {
-    CHECK(Vector<int>{1}.dot(Vector<int>{1}) == 1);
-    CHECK(Vector<int>{1, 2}.dot(Vector<int>{2, 5}) == 12);
-    CHECK(Vector<int>{-3, -4}.dot(Vector<int>{5, -2}) == -7);
+    CHECK(Vector<int>{1}.dot({1}) == 1);
+    CHECK(Vector<int>{1, 2}.dot({2, 5}) == 12);
+    CHECK(Vector<int>{-3, -4}.dot({5, -2}) == -7);
 
 }
 
 TEST_CASE("Vector cross Vector", "[vector]") {
     SECTION("is undefined for non-3d vectors") {
-        CHECK_THROWS_AS(Vector<int>{1}.cross(Vector<int>{1}), vectors::dimension_mismatch);
-        CHECK_THROWS_AS((Vector<int>{1, 2, 3, 4}.cross(Vector<int>{1, 2})), vectors::dimension_mismatch);
+        CHECK_THROWS_AS(Vector<int>{1}.cross({1}), vectors::dimension_mismatch);
+        CHECK_THROWS_AS((Vector<int>{1, 2, 3, 4}.cross({1, 2})), vectors::dimension_mismatch);
     }
 
-    CHECK(Vector<int>{1, 1, 1}.cross(Vector<int>{1, 1, 1}) == Vector<int>{0, 0, 0});
-    CHECK(Vector<int>{1, 0, 0}.cross(Vector<int>{0, 0, 1}) == Vector<int>{0, -1, 0});
-    CHECK(Vector<int>{3, 4, 5}.cross(Vector<int>{5, 4, 3}) == Vector<int>{-8, 16, -8});
+    CHECK(Vector<int>{1, 1, 1}.cross({1, 1, 1}) == Vector<int>{0, 0, 0});
+    CHECK(Vector<int>{1, 0, 0}.cross({0, 0, 1}) == Vector<int>{0, -1, 0});
+    CHECK(Vector<int>{3, 4, 5}.cross({5, 4, 3}) == Vector<int>{-8, 16, -8});
 }
 
 TEST_CASE("Vector project Vector", "[vector]") {
