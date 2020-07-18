@@ -11,9 +11,11 @@
 - [x] `<`
 - [x] `<=`
 - [x] always handle zero correctly
+- [x] no-args constructor produces zero fraction
+- [ ] enforce integral constraint for template (or remove it)
+- [ ] expand conversions to work with long double etc (?)
 
 ## Vectors
-with `Vector` class
 - [x] Calculate length 
 - [x] Normalize (set length to 1)
 - [x] Vector +/- Vector
@@ -22,7 +24,6 @@ with `Vector` class
 - [x] Cross product (`.cross(Vector)`) 3d only
 - [x] Vector projection (`.project(Vector)`)
 - [x] Angle between two vectors
-- [ ] Change basis (`.to_basis(Matrix)`)
 
 ## Matrices
 with `Matrix` class (all square)
@@ -50,6 +51,9 @@ with `Matrix` class (all square)
   - [ ] using QR-decomposition
   - [ ] brute-force
 - [ ] Calculate null space
+
+## Bases
+- [ ] Change a vector to a given basis
 - [ ] Make basis vectors orthonormal using Gram-Schmidt
   
 ## Systems

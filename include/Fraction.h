@@ -29,8 +29,9 @@ namespace fractions {
 
     template<typename I>
     class Fraction {
+
     public:
-        explicit Fraction(const I numerator, const I denominator = 1) {
+        explicit Fraction(const I numerator = 0, const I denominator = 1) {
             if (denominator == 0) {
                 throw division_by_zero();
             }
@@ -154,6 +155,11 @@ namespace fractions {
 
         friend bool operator<=(const I &lhs, const Fraction &rhs) {
             return !(lhs > rhs);
+        }
+
+        // implicit conversions intentionally allowed here
+        operator double () const {
+            return num / (double)denom;
         }
 
         friend std::ostream &operator<<(std::ostream &os, Fraction<I> r) {

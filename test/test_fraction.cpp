@@ -1,5 +1,6 @@
 #include <catch.hpp>
 #include <sstream>
+#include <cmath>
 #include "Fraction.h"
 
 using fractions::greatest_common_divisor, fractions::lowest_common_multiple, fractions::Fraction;
@@ -20,6 +21,14 @@ TEST_CASE("lowest_common_multiple", "[lowest_common_multiple]") {
     CHECK(lowest_common_multiple<int>(3, 5) == 15);
     CHECK(lowest_common_multiple<int>(39, 13) == 39);
     CHECK(lowest_common_multiple<int>(8, 12) == 24);
+}
+
+TEST_CASE("Fraction no-args constructor is zero", "[Fraction]") {
+    CHECK(Fraction<int>() == 0);
+}
+
+TEST_CASE("Fraction can be cast to double", "[Fraction]") {
+    CHECK((double) Fraction<int>{1, 2} == Approx(0.5));
 }
 
 TEST_CASE("Fraction equality", "[fraction]") {
@@ -159,4 +168,8 @@ TEST_CASE("Zero fractions", "[fraction]") {
     CHECK(zero / 1 == 0);
     CHECK(zero * zero == 0);
     CHECK_THROWS_AS(zero / zero, fractions::division_by_zero);
+}
+
+TEST_CASE("Fraction square root", "[fraction]") {
+    CHECK(sqrt(Fraction<int>{2, 3}) == Approx(0.8164965809277));
 }

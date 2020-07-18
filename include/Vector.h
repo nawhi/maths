@@ -45,7 +45,7 @@ namespace vectors {
         }
 
         I dot(const Vector &other) const {
-            return std::inner_product(elements.begin(), elements.end(), other.elements.begin(), 0);
+            return std::inner_product(elements.begin(), elements.end(), other.elements.begin(), I());
         }
 
         Vector cross(const Vector &other) const {
@@ -73,7 +73,8 @@ namespace vectors {
 
         double angle_to(const Vector& other) const {
             assert_dims_match(other);
-            return acos((double) dot(other) / (length() * other.length()));
+            const auto& cosine = dot(other) / (length() * other.length());
+            return acos((double) cosine);
         }
 
         bool operator==(const Vector &other) const {

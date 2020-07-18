@@ -102,4 +102,8 @@ TEST_CASE("Vector angle_to Vector is clockwise angle from v1 to v2", "[vector]")
 //    CHECK(Vector<double>{1, 1}.angle_to({1, 1}) == Approx(0)); // TODO why does this fail?
     CHECK(std::abs(Vector<double>{1, 1}.angle_to({1, 1})) < 0.00001);
     CHECK(Vector<double>{1, 1}.angle_to({-1, -1}) == Approx(M_PI));
+
+    // todo: wow this gets complicated
+//    CHECK(Vector<Fraction<int>>{Fraction<int>{1}, Fraction<int>{1}}.angle_to({Fraction<int>{-1}, Fraction<int>{-1}}) ==
+//          Approx(M_PI));
 }
