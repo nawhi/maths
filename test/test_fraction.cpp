@@ -28,8 +28,11 @@ TEST_CASE("Fraction no-args constructor is zero", "[Fraction]") {
     CHECK(Fraction<int>() == 0);
 }
 
-TEST_CASE("Fraction can be cast to double", "[Fraction]") {
+TEST_CASE("Fraction can be explicitly and implicitly cast to double", "[Fraction]") {
     CHECK((double) Fraction(1, 2) == Approx(0.5));
+
+    double d = Fraction(1, 7);
+    CHECK(d == Approx(0.142857).epsilon(0.00001));
 }
 
 TEST_CASE("Fraction equality", "[fraction]") {
