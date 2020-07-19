@@ -1,5 +1,6 @@
 #include <catch.hpp>
 #include <sstream>
+#include <complex.h>
 #include "Vector.h"
 #include "Fraction.h"
 

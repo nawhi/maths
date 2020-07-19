@@ -172,3 +172,4 @@ TEST_CASE("Zero fractions", "[fraction]") {
 TEST_CASE("Fraction square root", "[fraction]") {
     CHECK(sqrt(Fraction<int>{2, 3}) == Approx(0.8164965809277));
 }
+

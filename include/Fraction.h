@@ -12,13 +12,8 @@ namespace fractions {
     }
 
     template<typename I>
-    I abs(I i) {
-        return i < 0 ? -i : i;
-    }
-
-    template<typename I>
     I lowest_common_multiple(I a, I b) {
-        return (abs(a) / greatest_common_divisor(a, b)) * b;
+        return (std::abs(a) / greatest_common_divisor(a, b)) * b;
     }
 
     class division_by_zero : std::exception {
@@ -160,8 +155,8 @@ namespace fractions {
         }
 
         // implicit conversions intentionally allowed here
-        operator double () const {
-            return num / (double)denom;
+        operator double() const {
+            return num / (double) denom;
         }
 
         friend std::ostream &operator<<(std::ostream &os, Fraction<I> r) {
