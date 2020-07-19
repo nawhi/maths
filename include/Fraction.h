@@ -5,13 +5,13 @@
 
 namespace fractions {
 
-    template<class I, typename std::enable_if_t<std::is_integral_v<I>>* = nullptr>
+    template<class I, typename std::enable_if_t<std::is_integral_v<I>> * = nullptr>
     I greatest_common_divisor(I a, I b) {
         if (b == 0) return a;
         return greatest_common_divisor(b, a % b);
     }
 
-    template<class I, typename std::enable_if_t<std::is_integral_v<I>>* = nullptr>
+    template<class I, typename std::enable_if_t<std::is_integral_v<I>> * = nullptr>
     I lowest_common_multiple(I a, I b) {
         return (std::abs(a) / greatest_common_divisor(a, b)) * b;
     }
@@ -19,7 +19,7 @@ namespace fractions {
     class division_by_zero : std::exception {
     };
 
-    template<typename I>
+    template<class I, typename std::enable_if_t<std::is_integral_v<I>> * = nullptr>
     class Fraction {
 
     public:

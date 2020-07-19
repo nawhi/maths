@@ -29,16 +29,16 @@ TEST_CASE("Fraction no-args constructor is zero", "[Fraction]") {
 }
 
 TEST_CASE("Fraction can be cast to double", "[Fraction]") {
-    CHECK((double) Fraction<int>{1, 2} == Approx(0.5));
+    CHECK((double) Fraction(1, 2) == Approx(0.5));
 }
 
 TEST_CASE("Fraction equality", "[fraction]") {
     SECTION("Fraction == Fraction") {
-        CHECK(Fraction<int>(1) == Fraction<int>(1));
-        CHECK(Fraction<int>(2) == Fraction<int>(2));
-        CHECK(Fraction<int>(1, 2) == Fraction<int>(1, 2));
-        CHECK(Fraction<int>(2, 4) == Fraction<int>(1, 2));
-        CHECK(Fraction<int>(14, 26) == Fraction<int>(28, 52));
+        CHECK(Fraction(1) == Fraction(1));
+        CHECK(Fraction(2) == Fraction(2));
+        CHECK(Fraction(1, 2) == Fraction(1, 2));
+        CHECK(Fraction(2, 4) == Fraction(1, 2));
+        CHECK(Fraction(14, 26) == Fraction(28, 52));
     }
 
     SECTION("Fraction != Fraction") {
