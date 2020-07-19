@@ -32,6 +32,8 @@ namespace fractions {
 
     public:
         explicit Fraction(const I numerator = 0, const I denominator = 1) {
+            static_assert(std::is_integral_v<I>, "integral type required");
+
             if (denominator == 0) {
                 throw division_by_zero();
             }
@@ -212,4 +214,5 @@ namespace fractions {
     };
 
 }
+
 #endif //MATHS_FRACTION_H

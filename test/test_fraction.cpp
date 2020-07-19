@@ -12,7 +12,6 @@ TEST_CASE("greatest_common_divisor") {
     CHECK(greatest_common_divisor<int>(6, 3) == 3);
     CHECK(greatest_common_divisor<int>(8, 12) == 4);
     CHECK(greatest_common_divisor<int>(323, 437) == 19);
-
 }
 
 TEST_CASE("lowest_common_multiple", "[lowest_common_multiple]") {
