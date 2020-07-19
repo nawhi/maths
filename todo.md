@@ -24,6 +24,8 @@
 - [x] Vector projection (`.project(Vector)`)
 - [x] Angle between two vectors
 
+- [ ] Separate operations which can be done on integral types and ones which need e.g. sqrt and therefore require a floating-point type.
+
 ## Matrices
 with `Matrix` class (all square)
 - [ ] Compute matrix plus/minus:
