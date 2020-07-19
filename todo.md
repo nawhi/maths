@@ -23,6 +23,7 @@
 - [x] Cross product (`.cross(Vector)`) 3d only
 - [x] Vector projection (`.project(Vector)`)
 - [x] Angle between two vectors
+- [ ] Move any instance methods that need floating points off the class 
 
 ## Matrices
 with `Matrix` class (all square)
