@@ -121,10 +121,6 @@ namespace vectors {
             return Vector(result);
         }
 
-        I reduce(I init, std::function<I(I, I)> op) const {
-            return std::reduce(elements.begin(), elements.end(), init, op);
-        }
-
         Vector combine(Vector other, std::function<I(I, I)> binary_op) const {
             assert_dims_match(other);
 
