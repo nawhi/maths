@@ -17,21 +17,21 @@ TEST_CASE("Vector equality", "[vector]") {
 }
 
 TEST_CASE("Length of a vector", "[vector]") {
-    CHECK(Vector<int>{0}.length() == 0);
-    CHECK(Vector<int>{1}.length() == 1);
-    CHECK(Vector<int>{2}.length() == 2);
-    CHECK(Vector<int>{0, 1}.length() == 1);
-    CHECK(Vector<int>{3, 4}.length() == 5);
-    CHECK(Vector<int>{2, 3, 6}.length() == 7);
+    CHECK(Vector<double>{0}.length() == 0);
+    CHECK(Vector<double>{1}.length() == 1);
+    CHECK(Vector<double>{2}.length() == 2);
+    CHECK(Vector<double>{0, 1}.length() == 1);
+    CHECK(Vector<double>{3, 4}.length() == 5);
+    CHECK(Vector<double>{2, 3, 6}.length() == 7);
 
     CHECK(Vector<double>({12., 16., 21.}).length() == 29.);
 }
 
 TEST_CASE("Normalizing a vector (set to length 1)", "[vector]") {
-    CHECK(Vector<int>{1}.norm() == Vector<int>{1});
-    CHECK(Vector<int>{2}.norm() == Vector<int>{1});
-    CHECK(Vector<int>{1, 1}.norm() == Vector<int>{1, 1});
-    CHECK(Vector<int>{2, 2}.norm() == Vector<int>{1, 1});
+    CHECK(Vector<double>{1}.norm() == Vector<double>{1});
+    CHECK(Vector<double>{2}.norm() == Vector<double>{1});
+    CHECK(Vector<double>{1, 1}.norm() == Vector<double>{1, 1});
+    CHECK(Vector<double>{2, 2}.norm() == Vector<double>{1, 1});
     CHECK(Vector<double>({3., 4.}).norm() == Vector<double>{0.6, 0.8});
 }
 
@@ -98,7 +98,7 @@ TEST_CASE("Vector project Vector", "[vector]") {
 }
 
 TEST_CASE("Vector angle_to Vector is clockwise angle from v1 to v2", "[vector]") {
-    CHECK_THROWS_AS((Vector<int>{1, 2, 3, 4}.angle_to(Vector<int>{1, 2})), vectors::dimension_mismatch);
+    CHECK_THROWS_AS((Vector<double>{1, 2, 3, 4}.angle_to(Vector<double>{1, 2})), vectors::dimension_mismatch);
 
 //    CHECK(Vector<double>{1, 1}.angle_to({1, 1}) == Approx(0)); // TODO why does this fail?
     CHECK(std::abs(Vector<double>{1, 1}.angle_to({1, 1})) < 0.00001);

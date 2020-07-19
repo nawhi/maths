@@ -35,12 +35,13 @@ namespace vectors {
 
         explicit Vector(std::vector<I> elems) : elements(elems), dimension(elems.size()) {}
 
-        I length() const {
+        double length() const {
+            static_assert(std::is_floating_point_v<I>);
             return sqrt(mapped_sum(square));
         }
 
         Vector norm() const {
-            const auto len = length();
+            const double len = length();
             return map([&len](const I &i) { return i / len; });
         }
 
@@ -71,7 +72,8 @@ namespace vectors {
             });
         }
 
-        double angle_to(const Vector& other) const {
+        I angle_to(const Vector& other) const {
+            static_assert(std::is_floating_point_v<I>);
             assert_dims_match(other);
             const auto& cosine = dot(other) / (length() * other.length());
             return acos((double) cosine);

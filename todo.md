@@ -24,8 +24,6 @@
 - [x] Vector projection (`.project(Vector)`)
 - [x] Angle between two vectors
 
-- [ ] Separate operations which can be done on integral types and ones which need e.g. sqrt and therefore require a floating-point type.
-
 ## Matrices
 with `Matrix` class (all square)
 - [ ] Compute matrix plus/minus:
@@ -62,6 +60,7 @@ with `Matrix` class (all square)
 - [ ] Solve a system using Gaussian elimination
 
 ## Other
+- [ ] Replace static_asserts for operations requiring floating point with templates
 - [ ] Can the size parameter be templated?
 - [ ] Cross products in other dimensions
 - [ ] Support non-square matrices - different class, or generalisation?
