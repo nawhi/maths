@@ -19,9 +19,6 @@ namespace fractions {
     class division_by_zero : std::exception {
     };
 
-    class bad_init : std::exception {
-    };
-
     template<typename I>
     class Fraction {
 
