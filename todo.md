@@ -12,8 +12,7 @@
 - [x] `<=`
 - [x] always handle zero correctly
 - [x] no-args constructor produces zero fraction
-- [ ] enforce integral constraint for template (or remove it)
-- [ ] expand conversions to work with long double etc (?)
+- [x] enforce integral constraint for template (or remove it)
 
 ## Vectors
 - [x] Calculate length 
