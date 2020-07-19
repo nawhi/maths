@@ -6,20 +6,22 @@
 using fractions::greatest_common_divisor, fractions::lowest_common_multiple, fractions::Fraction;
 
 TEST_CASE("greatest_common_divisor") {
-    CHECK(greatest_common_divisor<int>(1, 0) == 1);
-    CHECK(greatest_common_divisor<int>(1, 1) == 1);
-    CHECK(greatest_common_divisor<int>(2, 2) == 2);
-    CHECK(greatest_common_divisor<int>(6, 3) == 3);
-    CHECK(greatest_common_divisor<int>(8, 12) == 4);
-    CHECK(greatest_common_divisor<int>(323, 437) == 19);
+    CHECK(greatest_common_divisor(1, 0) == 1);
+    CHECK(greatest_common_divisor(1, 1) == 1);
+    CHECK(greatest_common_divisor(2, 2) == 2);
+    CHECK(greatest_common_divisor(6, 3) == 3);
+    CHECK(greatest_common_divisor(8, 12) == 4);
+    CHECK(greatest_common_divisor(323, 437) == 19);
+    CHECK(greatest_common_divisor(LONG_MAX, LONG_MAX) == LONG_MAX);
 }
 
 TEST_CASE("lowest_common_multiple", "[lowest_common_multiple]") {
-    CHECK(lowest_common_multiple<int>(1, 1) == 1);
-    CHECK(lowest_common_multiple<int>(2, 2) == 2);
-    CHECK(lowest_common_multiple<int>(3, 5) == 15);
-    CHECK(lowest_common_multiple<int>(39, 13) == 39);
-    CHECK(lowest_common_multiple<int>(8, 12) == 24);
+    CHECK(lowest_common_multiple(1, 1) == 1);
+    CHECK(lowest_common_multiple(2, 2) == 2);
+    CHECK(lowest_common_multiple(3, 5) == 15);
+    CHECK(lowest_common_multiple(39, 13) == 39);
+    CHECK(lowest_common_multiple(8, 12) == 24);
+    CHECK(lowest_common_multiple(LONG_MAX, LONG_MAX) == LONG_MAX);
 }
 
 TEST_CASE("Fraction no-args constructor is zero", "[Fraction]") {
