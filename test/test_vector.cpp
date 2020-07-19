@@ -30,9 +30,7 @@ TEST_CASE("Length of a vector", "[vector]") {
 TEST_CASE("Normalizing a vector (set to length 1)", "[vector]") {
     CHECK(Vector<double>{1}.norm() == Vector<double>{1});
     CHECK(Vector<double>{2}.norm() == Vector<double>{1});
-    CHECK(Vector<double>{1, 1}.norm() == Vector<double>{1, 1});
-    CHECK(Vector<double>{2, 2}.norm() == Vector<double>{1, 1});
-    CHECK(Vector<double>({3., 4.}).norm() == Vector<double>{0.6, 0.8});
+    CHECK(Vector<double>({3, 4}).norm() == Vector<double>{0.6, 0.8});
 }
 
 TEST_CASE("Vector stream overload", "[vector]") {

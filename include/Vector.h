@@ -72,10 +72,10 @@ namespace vectors {
             });
         }
 
-        I angle_to(const Vector& other) const {
+        I angle_to(const Vector &other) const {
             static_assert(std::is_floating_point_v<I>);
             assert_dims_match(other);
-            const auto& cosine = dot(other) / (length() * other.length());
+            const auto &cosine = dot(other) / (length() * other.length());
             return acos((double) cosine);
         }
 
@@ -121,7 +121,7 @@ namespace vectors {
             return Vector(result);
         }
 
-        Vector combine(Vector other, std::function<I(I, I)> binary_op) const {
+        Vector combine(const Vector &other, std::function<I(I, I)> binary_op) const {
             assert_dims_match(other);
 
             std::vector<I> result(other.dimension);
