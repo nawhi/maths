@@ -28,7 +28,7 @@
 with `Matrix` class (all square)
 - [x] Matrix string repr
 - [x] Matrix plus Matrix
-- [ ] Matrix minus Matrix
+- [x] Matrix minus Matrix
 - Matrix times:
   - [ ] scalar (inc 1/x)
   - [ ] vector
