@@ -36,11 +36,11 @@ namespace matrices {
         }
 
         Matrix operator+(const Matrix &other) const {
-            std::vector<Vector<I>> result;
-            for (size_t i = 0; i < rows.size(); i++) {
-                result.push_back(rows[i] + other.rows[i]);
-            }
-            return Matrix(result);
+            return combine(other, [](const auto& a, const auto& b) { return a + b; });
+        }
+
+        Matrix operator-(const Matrix &other) const {
+            return combine(other, [](const auto& a, const auto& b) { return a - b; });
         }
 
         friend std::ostream &operator<<(std::ostream &os, const Matrix &mx) {
@@ -52,6 +52,14 @@ namespace matrices {
     private:
         std::vector<Vector<I>> rows;
         Matrix(std::vector<Vector<I>> rows): rows(rows) {}
+
+        Matrix combine(const Matrix& other, std::function<Vector<I>(Vector<I>, Vector<I>)> binary_op) const {
+            std::vector<Vector<I>> result;
+            for (size_t i = 0; i < rows.size(); i++) {
+                result.push_back(binary_op(rows[i], other.rows[i]));
+            }
+            return Matrix(result);
+        }
     };
 
 }

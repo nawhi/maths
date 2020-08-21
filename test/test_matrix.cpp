@@ -33,3 +33,7 @@ TEST_CASE("Matrix + Matrix", "[matrix]") {
     CHECK(Matrix<int>{{1, 2}, {3, 4}} + Matrix<int>{{1, 1}, {1, 1}} == Matrix<int>{{2, 3}, {4, 5}});
 }
 
+TEST_CASE("Matrix - Matrix", "[matrix]") {
+    CHECK(Matrix<int>{{1, 2}, {3, 4}} - Matrix<int>{{9, 9}, {9, 9}} == Matrix<int>{{-8, -7}, {-6, -5}});
+}
+

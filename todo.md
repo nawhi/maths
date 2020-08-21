@@ -27,16 +27,14 @@
 ## Matrices
 with `Matrix` class (all square)
 - [x] Matrix string repr
-- [ ] Compute matrix plus/minus:
-  - [ ] scalar
-  - [ ] vector
-  - [ ] matrix
-- Compute matrix times:
+- [x] Matrix plus Matrix
+- [ ] Matrix minus Matrix
+- Matrix times:
   - [ ] scalar (inc 1/x)
   - [ ] vector
   - [ ] matrix
 - [ ] Find eigenvalues of a matrix
-  - [ ] characteristic polynomail
+  - [ ] characteristic polynomial
   - [ ] power rule
 - [ ] Test if given vector is an eigenvector of given matrix
 - [ ] Change a matrix to its eigenbasis (?)
