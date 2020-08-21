@@ -22,6 +22,14 @@ TEST_CASE("Matrix streaming", "[matrix]") {
 
     const auto s2 = (std::ostringstream() << mx2).str();
     CHECK(s2 == "[1 2 3]\n[4 5 6]\n[7 8 9]");
+}
 
+TEST_CASE("Matrix equality", "[matrix]") {
+    CHECK(Matrix<int>{{1, 2}, {3, 4}} == Matrix<int>{{1, 2}, {3, 4}});
+    CHECK(Matrix<int>{{3, 4}, {1, 2}} != Matrix<int>{{1, 2}, {3, 4}});
+}
+
+TEST_CASE("Matrix + Matrix", "[matrix]") {
+    CHECK(Matrix<int>{{1, 2}, {3, 4}} + Matrix<int>{{1, 1}, {1, 1}} == Matrix<int>{{2, 3}, {4, 5}});
 }
 

@@ -17,24 +17,41 @@ namespace matrices {
     template<typename I>
     class Matrix {
     public:
-        Matrix(const std::initializer_list<std::initializer_list<I>>&& init) {
+        Matrix(const std::initializer_list<std::initializer_list<I>> &&init) {
             if (init.size() == 0)
                 throw bad_matrix();
             auto i = std::move(init);
-            for (const std::initializer_list<I>& row: i) {
+            for (const std::initializer_list<I> &row: i) {
                 Vector<I> v{row};
                 rows.push_back(v);
             }
         }
 
-        friend std::ostream& operator << (std::ostream& os, const Matrix& mx) {
+        bool operator==(const Matrix &other) const {
+            return rows == other.rows;
+        }
+
+        bool operator!=(const Matrix &other) const {
+            return rows != other.rows;
+        }
+
+        Matrix operator+(const Matrix &other) const {
+            std::vector<Vector<I>> result;
+            for (size_t i = 0; i < rows.size(); i++) {
+                result.push_back(rows[i] + other.rows[i]);
+            }
+            return Matrix(result);
+        }
+
+        friend std::ostream &operator<<(std::ostream &os, const Matrix &mx) {
             os << mx.rows[0];
-            std::for_each(mx.rows.begin() + 1, mx.rows.end(), [&os](const auto& row) { os << "\n" << row; });
+            std::for_each(mx.rows.begin() + 1, mx.rows.end(), [&os](const auto &row) { os << "\n" << row; });
             return os;
         }
 
     private:
         std::vector<Vector<I>> rows;
+        Matrix(std::vector<Vector<I>> rows): rows(rows) {}
     };
 
 }

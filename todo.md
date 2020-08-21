@@ -26,6 +26,7 @@
 
 ## Matrices
 with `Matrix` class (all square)
+- [x] Matrix string repr
 - [ ] Compute matrix plus/minus:
   - [ ] scalar
   - [ ] vector
