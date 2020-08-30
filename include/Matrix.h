@@ -4,7 +4,6 @@
 #define MATRIX_MATRIX_H
 
 #include <vector>
-
 #include "Vector.h"
 
 namespace matrices {
@@ -36,11 +35,19 @@ namespace matrices {
         }
 
         Matrix operator+(const Matrix &other) const {
-            return combine(other, [](const auto& a, const auto& b) { return a + b; });
+            return combine(other, [](const auto &a, const auto &b) { return a + b; });
         }
 
         Matrix operator-(const Matrix &other) const {
-            return combine(other, [](const auto& a, const auto& b) { return a - b; });
+            return combine(other, [](const auto &a, const auto &b) { return a - b; });
+        }
+
+        Matrix operator*(const I &i) const {
+            return row_map([&i](const auto &row) { return row * i; });
+        }
+
+        Matrix operator/(const I &i) const {
+            return row_map([&i](const auto &row) { return row / i; });
         }
 
         friend std::ostream &operator<<(std::ostream &os, const Matrix &mx) {
@@ -51,14 +58,23 @@ namespace matrices {
 
     private:
         std::vector<Vector<I>> rows;
-        Matrix(std::vector<Vector<I>> rows): rows(rows) {}
 
-        Matrix combine(const Matrix& other, std::function<Vector<I>(Vector<I>, Vector<I>)> binary_op) const {
+        Matrix(std::vector<Vector<I>> rows) : rows(rows) {}
+
+        Matrix combine(const Matrix &other, std::function<Vector<I>(Vector<I>, Vector<I>)> binary_op) const {
             std::vector<Vector<I>> result;
             for (size_t i = 0; i < rows.size(); i++) {
                 result.push_back(binary_op(rows[i], other.rows[i]));
             }
             return Matrix(result);
+        }
+
+        Matrix row_map(std::function<Vector<I>(Vector<I>)> mapper) const {
+            std::vector<Vector<I>> result;
+            for (size_t i = 0; i < rows.size(); i++) {
+                result.push_back(mapper(rows[i]));
+            }
+            return result;
         }
     };
 

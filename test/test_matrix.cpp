@@ -37,3 +37,11 @@ TEST_CASE("Matrix - Matrix", "[matrix]") {
     CHECK(Matrix<int>{{1, 2}, {3, 4}} - Matrix<int>{{9, 9}, {9, 9}} == Matrix<int>{{-8, -7}, {-6, -5}});
 }
 
+TEST_CASE("Matrix * Scalar", "[matrix]") {
+    CHECK(Matrix<int>{{1, 2}, {3, 4}} * 5 == Matrix<int>{{5, 10}, {15, 20}});
+}
+
+TEST_CASE("Matrix / Scalar", "[matrix]") {
+    CHECK(Matrix<int>{{5, 10}, {15, 20}} / 5 == Matrix<int>{{1, 2}, {3, 4}});
+}
+

@@ -30,7 +30,7 @@ with `Matrix` class (all square)
 - [x] Matrix plus Matrix
 - [x] Matrix minus Matrix
 - Matrix times:
-  - [ ] scalar (inc 1/x)
+  - [x] scalar (inc 1/x)
   - [ ] vector
   - [ ] matrix
 - [ ] Find eigenvalues of a matrix
