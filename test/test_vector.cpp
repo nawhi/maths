@@ -11,6 +11,12 @@ TEST_CASE("Illegal vector construction", "[vector]") {
     CHECK_THROWS_AS(Vector<int>({}), vectors::bad_vector);
 }
 
+TEST_CASE("Vector::zero", "[vector]") {
+    CHECK(Vector<int>::zero(3) == Vector<int>{0, 0, 0});
+    CHECK(Vector<int>::zero(9) == Vector<int>{0, 0, 0, 0, 0, 0, 0, 0, 0});
+    CHECK_THROWS_AS(Vector<int>::zero(0), vectors::bad_vector);
+}
+
 TEST_CASE("Vector equality", "[vector]") {
     CHECK(Vector<int>{1} == Vector<int>{1});
     CHECK(Vector<int>{2} != Vector<int>{1});

@@ -29,6 +29,11 @@ TEST_CASE("Matrix equality", "[matrix]") {
     CHECK(Matrix<int>{{3, 4}, {1, 2}} != Matrix<int>{{1, 2}, {3, 4}});
 }
 
+TEST_CASE("Matrix dimensions", "[matrix]") {
+    CHECK(Matrix<int>{{1}, {2}}.width() == 1);
+    CHECK(Matrix<int>{{1}, {2}}.height() == 2);
+}
+
 TEST_CASE("Matrix + Matrix", "[matrix]") {
     CHECK(Matrix<int>{{1, 2}, {3, 4}} + Matrix<int>{{1, 1}, {1, 1}} == Matrix<int>{{2, 3}, {4, 5}});
 }
@@ -44,4 +49,13 @@ TEST_CASE("Matrix * Scalar", "[matrix]") {
 TEST_CASE("Matrix / Scalar", "[matrix]") {
     CHECK(Matrix<int>{{5, 10}, {15, 20}} / 5 == Matrix<int>{{1, 2}, {3, 4}});
 }
+
+// TODO
+//TEST_CASE("Matrix * Vector", "[matrix]") {
+//    CHECK((Matrix<int>{{1, 2}, {3, 4}} * Vector<int>{1, 2}) == Vector<int>{5, 11});
+    // other cases:
+    // dimension mismatch
+    // nonsquare matrix
+    // square matrix of different size
+//}
 

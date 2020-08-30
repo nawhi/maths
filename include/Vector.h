@@ -27,13 +27,26 @@ namespace vectors {
     public:
         Vector() = delete;
 
-        Vector(std::initializer_list<I> &&init) : elements(init), dimension(elements.size()) {
+        static Vector zero(I dimension) {
+            if (dimension <= 0) {
+                throw bad_vector();
+            }
+            std::vector<I> v(dimension);
+            v.assign(dimension, 0);
+            return Vector(v);
+        }
+
+        Vector(std::initializer_list<I> &&init) : _elements(init), _dimension(_elements.size()) {
             if (init.size() == 0) {
                 throw bad_vector();
             }
         }
 
-        explicit Vector(std::vector<I> elems) : elements(elems), dimension(elems.size()) {}
+        explicit Vector(std::vector<I> elems) : _elements(elems), _dimension(elems.size()) {}
+
+        size_t dimension() const {
+            return _dimension;
+        }
 
         double length() const {
             static_assert(std::is_floating_point_v<I>);
@@ -46,15 +59,15 @@ namespace vectors {
         }
 
         I dot(const Vector &other) const {
-            return std::inner_product(elements.begin(), elements.end(), other.elements.begin(), I());
+            return std::inner_product(_elements.begin(), _elements.end(), other._elements.begin(), I());
         }
 
         Vector cross(const Vector &other) const {
-            if (dimension != 3 || other.dimension != 3) {
+            if (_dimension != 3 || other._dimension != 3) {
                 throw dimension_mismatch("cannot take cross product of non-3d vector");
             }
 
-            const auto &u = elements, &v = other.elements;
+            const auto &u = _elements, &v = other._elements;
 
             return {
                     u[1] * v[2] - u[2] * v[1],
@@ -80,11 +93,11 @@ namespace vectors {
         }
 
         bool operator==(const Vector &other) const {
-            return elements == other.elements;
+            return _elements == other._elements;
         }
 
         bool operator!=(const Vector &other) const {
-            return elements != other.elements;
+            return _elements != other._elements;
         }
 
         Vector operator+(const Vector &other) const {
@@ -104,8 +117,8 @@ namespace vectors {
         }
 
         friend std::ostream &operator<<(std::ostream &os, const Vector &v) {
-            os << "[" << v.elements[0];
-            std::for_each(v.elements.begin() + 1, v.elements.end(), [&os](const auto &e) { os << " " << e; });
+            os << "[" << v._elements[0];
+            std::for_each(v._elements.begin() + 1, v._elements.end(), [&os](const auto &e) { os << " " << e; });
             os << "]";
             return os;
         }
@@ -116,34 +129,34 @@ namespace vectors {
         }
 
         Vector map(std::function<I(I)> op) const {
-            std::vector<I> result(dimension);
-            std::transform(elements.begin(), elements.end(), result.begin(), op);
+            std::vector<I> result(_dimension);
+            std::transform(_elements.begin(), _elements.end(), result.begin(), op);
             return Vector(result);
         }
 
         Vector combine(const Vector &other, std::function<I(I, I)> binary_op) const {
             assert_dims_match(other);
 
-            std::vector<I> result(other.dimension);
-            std::transform(elements.begin(), elements.end(), other.elements.begin(), result.begin(), binary_op);
+            std::vector<I> result(other._dimension);
+            std::transform(_elements.begin(), _elements.end(), other._elements.begin(), result.begin(), binary_op);
             return Vector(result);
         }
 
         void assert_dims_match(const Vector &other) const {
-            if (other.dimension != dimension) {
+            if (other._dimension != _dimension) {
                 std::ostringstream os;
-                os << "Dimensions differ: " << dimension << " and " << other.dimension;
+                os << "Dimensions differ: " << _dimension << " and " << other._dimension;
                 throw dimension_mismatch(os.str());
             }
         }
 
         I mapped_sum(std::function<I(I)> mapper) const {
-            return std::reduce(elements.begin(), elements.end(), I(),
+            return std::reduce(_elements.begin(), _elements.end(), I(),
                                [&mapper](const I &acc, const I &i) { return acc + mapper(i); });
         }
 
-        const std::vector<I> elements;
-        const size_t dimension;
+        const std::vector<I> _elements;
+        const size_t _dimension;
     };
 
 }
